@@ -144,3 +144,5 @@ staticfiles/*
 
 !.gitkeep
 snipe/settings/conf.py
+
+.idea

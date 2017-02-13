@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+        <div class="container">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="#">Snipe</a>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <form class="form-inline mr-auto mt-2 mt-md-0">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+                <ul class="navbar-nav my-2 my-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Discover</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">My Snippets</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">New Snippet</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    {% block header_additional %}
+
+    {% endblock %}
+</header>
+<main>
+    {% block body_main %}
+
+    {% endblock %}
+</main>
+<footer>
+    {% block footer_additional %}
+
+    {% endblock %}
+</footer>
+
+<!-- jQuery first, then Tether, then Bootstrap JS. -->
+<script src="{% static 'javascript/jquery-3.1.1.slim.min.js' %}"></script>
+<script src="{% static 'javascript/tether.min.js' %}"></script>
+<script src="{% static 'javascript/bootstrap.min.js' %}"></script>
+</body>
+</html>

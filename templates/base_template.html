@@ -6,40 +6,52 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <title>{% block title %} {% endblock %}</title>
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 </head>
 <body>
 <header>
     <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-        <div class="container">
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <a class="navbar-brand" href="#">Snipe</a>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <form class="form-inline mr-auto mt-2 mt-md-0">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
-                <ul class="navbar-nav my-2 my-lg-0">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Discover</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">My Snippets</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">New Snippet</a>
-                    </li>
-                </ul>
-            </div>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#">Snipe</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <form class="form-inline mr-auto mt-2 mt-md-0">
+                <div class="input-group">
+                    <input class="form-control" type="text" placeholder="Search for a Snippet...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-secondary" type="submit">Search</button>
+                    </span>
+                </div>
+            </form>
+            <ul class="navbar-nav my-2 my-lg-0">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Discover</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">New Snippet</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                       aria-haspopup="true" aria-expanded="false">
+                        raagga@microsoft.com
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="Preview">
+                        <a class="dropdown-item" href="#">My Snippets</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Settings</a>
+                        <a class="dropdown-item" href="#">Logout</a>
+                    </div>
+                </li>
+            </ul>
         </div>
-    </nav>
 
+    </nav>
 
     {% block header_additional %}
 

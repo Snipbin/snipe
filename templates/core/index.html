@@ -2,6 +2,46 @@
 
 {% load staticfiles %}
 
+{% block title %}
+    Snipe &middot; Home
+{% endblock %}
+
 {% block body_main %}
-    Snipe it!
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <br>
+                <h2>New Snippet</h2>
+                <hr>
+                <form>
+                    <div class="form-group">
+                        <label for="snip-title">Title</label>
+                        <input id="snip-title" class="form-control" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label for="snip-code">Code</label>
+                        <textarea id="snip-code" class="form-control" rows="16"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="mr-sm-2" for="snip-expiry">Expires</label>
+                        <select class="custom-select mb-4 mr-sm-4 mb-sm-0" id="snip-expiry">
+                            <option selected value="0">Never</option>
+                            <option value="7">One Week</option>
+                            <option value="14">Two Weeks</option>
+                            <option value="30">One Month</option>
+                            <option value="365">One Year</option>
+                        </select>
+
+                        <label class="custom-control custom-checkbox mb-4 mr-sm-4 mb-sm-0">
+                            <input type="checkbox" class="custom-control-input">
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description">Private Snippet</span>
+                        </label>
+
+                        <button type="submit" class="btn btn-outline-success">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -4,7 +4,7 @@ from django.db import models
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, related_name='user_profile')
-    picture = None
+    picture = models.ImageField()
     organisation = models.CharField(max_length=256)
     designation = models.CharField(max_length=256)
 

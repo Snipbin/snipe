@@ -11,35 +11,66 @@
         <div class="row">
             <div class="col-12">
                 <br>
-                <h2>New Snippet</h2>
-                <hr>
                 <form>
-                    <div class="form-group">
-                        <label for="snip-title">Title</label>
-                        <input id="snip-title" class="form-control" type="text">
-                    </div>
-                    <div class="form-group">
-                        <label for="snip-code">Code</label>
-                        <textarea id="snip-code" class="form-control" rows="16"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label class="mr-sm-2" for="snip-expiry">Expires</label>
-                        <select class="custom-select mb-4 mr-sm-4 mb-sm-0" id="snip-expiry">
-                            <option selected value="0">Never</option>
-                            <option value="7">One Week</option>
-                            <option value="14">Two Weeks</option>
-                            <option value="30">One Month</option>
-                            <option value="365">One Year</option>
-                        </select>
+                    <h5>New Snippet</h5>
+                    <hr>
 
-                        <label class="custom-control custom-checkbox mb-4 mr-sm-4 mb-sm-0">
-                            <input type="checkbox" class="custom-control-input">
-                            <span class="custom-control-indicator"></span>
-                            <span class="custom-control-description">Private Snippet</span>
-                        </label>
-
-                        <button type="submit" class="btn btn-outline-success">Submit</button>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input id="snip-title" placeholder="Snippet Title" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-4 offset-md-2">
+                            <div class="form-group" style="width: inherit">
+                                <select class="custom-select" style="width: inherit" title="Language">
+                                    <option value="Plain Text">Plain Text</option>
+                                    <option value="C++">C++</option>
+                                    <option value="C#">C#</option>
+                                    <option value="Python">Python</option>
+                                    <option value="Java">Java</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
+                    <div class="form-group">
+                        <textarea placeholder="Snippet Data" id="snip-code" class="form-control" rows="16"></textarea>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Optional Settings</h5>
+                            <hr>
+                            <div class="form-group" style="width: inherit">
+                                <select class="custom-select" id="snip-expiry" title="Expiry"
+                                        style="width: inherit">
+                                    <option selected value="0">Never Expire</option>
+                                    <option value="7">Expire in One Week</option>
+                                    <option value="14">Expire in Two Weeks</option>
+                                    <option value="30">Expire in One Month</option>
+                                    <option value="365">Expire in One Year</option>
+                                </select>
+                            </div>
+                            <div class="form-group" style="width: inherit">
+                                <select class="custom-select" id="snip-privacy" title="Expiry"
+                                        style="width: inherit">
+                                    <option selected value="public">Visible to everyone</option>
+                                    <option value="private">Visible to just me</option>
+                                    <option value="protected">Visible to some people in my organisation</option>
+                                </select>
+                            </div>
+                            <div class="form-group" style="width: inherit">
+                                <input class="form-control" placeholder="Visible to ... (Start typing aliases)">
+                            </div>
+                        </div>
+                        <div class="col-md-4 offset-md-2">
+                            <button type="submit" class="btn btn-outline-success mb-4" style="width: inherit">Create New
+                                Snippet
+                            </button>
+                        </div>
+                    </div>
+
+
                 </form>
             </div>
         </div>

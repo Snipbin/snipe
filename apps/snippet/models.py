@@ -2,25 +2,14 @@ from django.db import models
 from simple_history.models import HistoricalRecords
 
 from apps.account.models import UserProfile
-
-
-LANGUAGE_CHOICES = (
-    (1, "C#"),
-    (2, "PowerShell"),
-    (3, "C++"),
-    (4, "Python"),
-    (5, "Rust"),
-    (6, "JavaScript"),
-    (7, "CSS"),
-)
+from apps.core.models import Language
 
 
 class Snippet(models.Model):
     title = models.CharField(max_length=64)
-    description = models.CharField(max_length=256)
-    language = models.IntegerField(choices=LANGUAGE_CHOICES, default=1)
+    language = models.ForeignKey(Language, related_name='snip_lang')
     code = models.TextField()
-    author = models.ForeignKey(UserProfile, related_name="snippet")
+    author = models.ForeignKey(UserProfile, related_name="snip_author")
     uid = models.CharField(max_length=32)
     is_private = models.BooleanField(default=False)
     created = models.DateTimeField()

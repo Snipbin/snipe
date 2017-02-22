@@ -4,7 +4,7 @@ from django.views.generic import View
 from apps.core.models import Language
 
 
-class Home(View):
+class NewSnippet(View):
     homepage = 'core/index.html'
 
     def get(self, request):

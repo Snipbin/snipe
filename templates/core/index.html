@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-12">
                 <br>
-                <form>
+                <form method="post" action="/">
                     {% csrf_token %}
                     <h5>New Snippet</h5>
                     <hr>
@@ -19,12 +19,13 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input id="snip-title" placeholder="Snippet Title" class="form-control" type="text">
+                                <input id="snip-title" name="title" placeholder="Snippet Title" class="form-control"
+                                       type="text">
                             </div>
                         </div>
                         <div class="col-md-4 offset-md-2">
                             <div class="form-group" style="width: inherit">
-                                <select class="custom-select" style="width: inherit" title="Language">
+                                <select name="language" class="custom-select" style="width: inherit" title="Language">
                                     {% for language in all_languages %}
                                         <option value="{{ language.id }}">{{ language.name }}</option>
                                     {% endfor %}
@@ -33,7 +34,8 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <textarea placeholder="Snippet Data" id="snip-code" class="form-control" rows="16"></textarea>
+                        <textarea placeholder="Snippet Data" name="code" id="snip-code" class="form-control"
+                                  rows="16"></textarea>
                     </div>
 
                     <div class="row">
@@ -41,7 +43,7 @@
                             <h5>Optional Settings</h5>
                             <hr>
                             <div class="form-group" style="width: inherit">
-                                <select class="custom-select" id="snip-expiry" title="Expiry"
+                                <select class="custom-select" name="expiry" id="snip-expiry" title="Expiry"
                                         style="width: inherit">
                                     <option selected value="0">Never Expire</option>
                                     <option value="7">Expire in One Week</option>
@@ -51,7 +53,7 @@
                                 </select>
                             </div>
                             <div class="form-group" style="width: inherit">
-                                <select class="custom-select" id="snip-privacy" title="Expiry"
+                                <select class="custom-select" name="privacy" id="snip-privacy" title="Expiry"
                                         style="width: inherit">
                                     <option selected value="public">Visible to everyone</option>
                                     <option value="private">Visible to just me</option>
@@ -59,13 +61,23 @@
                                 </select>
                             </div>
                             <div class="form-group" style="width: inherit">
-                                <input class="form-control" placeholder="Visible to ... (Start typing aliases)">
+                                <input name="aliases" class="form-control"
+                                       placeholder="Visible to ... (Start typing aliases)">
                             </div>
                         </div>
-                        <div class="col-md-4 offset-md-2">
-                            <button type="submit" class="btn btn-outline-success mb-4" style="width: inherit">Create New
-                                Snippet
-                            </button>
+                        <div class="col-md-6">
+                            <div class="form-group" style="width: inherit">
+                                <input class="btn btn-outline-success mb-4" type="submit" style="width: inherit"
+                                       value="Create New Snippet">
+                            </div>
+                            {% for error in errors %}
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
                         </div>
                     </div>
 

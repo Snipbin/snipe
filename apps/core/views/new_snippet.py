@@ -7,7 +7,7 @@ from apps.core.models import Language
 from apps.snippet.models import Snippet
 
 
-class NewSnippet(View):
+class NewSnippetView(View):
     homepage = 'core/index.html'
 
     def get(self, request):
@@ -36,9 +36,9 @@ class NewSnippet(View):
                 snippet_is_private = True
             snippet = Snippet(
                 title=post_data['title'],
-                language=Language.objects.all().filter(id=int(post_data['language']))[0],
+                language=Language.objects.all().filter(id=int(post_data['language'])).first(),
                 code=post_data['code'],
-                author=UserProfile.objects.all().filter(id=1)[0],
+                author=UserProfile.objects.all().filter(id=1).first(),
                 is_private=snippet_is_private,
                 created_at=snippet_created_date,
                 last_modified=snippet_created_date,

@@ -1,7 +1,7 @@
 from django.conf.urls import url
 
-from apps.core.views.new_snippet import NewSnippet
+from apps.core.views.new_snippet import NewSnippetView
 
 urlpatterns = [
-    url(r'^$', NewSnippet.as_view(), name='new_snippet'),
+    url(r'^$', NewSnippetView.as_view(), name='new_snippet'),
 ]

@@ -9,25 +9,28 @@
 
 {% block body_main %}
     <div class="container">
+        <br>
         <div class="row">
             <div class="col-md-12">
-                <br>
-                <div class="card">
-                    <div class="card-block">
-                        <h5 class="card-title">{{ snippet.title }}</h5>
-                        <hr>
-                        <p class="card-text bg-faded" style="padding: 10px">{{ snippet.code }}</p>
-                        <hr>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h6>{{ snippet.author }} &middot; {{ snippet.language }}</h6>
-                            </div>
-                            <div class="col-md-6">
-                                <h6 class="text-md-right">Last Modified {{ snippet.last_modified }}</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <h5 class="card-title">{{ snippet.title }}</h5>
+                <h6><a href="#">{{ snippet.author.user.first_name }} {{ snippet.author.user.last_name }}</a>
+                    &middot; {{ snippet.author.designation }} &middot; {{ snippet.author.organisation }}</h6>
+                {# ToDO: Fix href #}
+            </div>
+            <div class="col-md-12">
+                <hr>
+            </div>
+            <div class="col-md-12">
+                <p class="card-text bg-faded" style="padding: 10px">{{ snippet.code }}</p>
+            </div>
+            <div class="col-md-12">
+                <hr>
+            </div>
+            <div class="col-md-6">
+                <h6 class="text-muted">&lt; {{ snippet.language }} &gt;</h6>
+            </div>
+            <div class="col-md-6">
+                <p class="text-md-right text-muted">Last Modified {{ snippet.last_modified }}</p>
             </div>
         </div>
     </div>

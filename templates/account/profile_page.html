@@ -1,10 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    User Profile
-</body>
-</html>
+{% extends "base_template.html" %}
+
+{% load staticfiles %}
+
+{% block title %}
+    {{ user.user.first_name }} {{ user.user.last_name }} &middot; Snipe
+    {# ToDo: Render from Snippet Object #}
+{% endblock %}
+
+{% block body_main %}
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-1" style="background-color: #4b5257">
+            </div>
+            <div class="col-md-11">
+                <h5>
+                    {{ user.user.first_name }} {{ user.user.last_name }}
+                    <br>
+                    <span class="text-muted">{{ user.user.username }}</span>
+                </h5>
+                <hr>
+            </div>
+            <div class="col-md-12"><br></div>
+            {% for snippet in snippets %}
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>{{ snippet.title }}</h5>
+                        </div>
+                        <div class="card-block">
+                            <p>{{ snippet.code }}</p>
+                        </div>
+                        <div class="card-footer text-muted">
+                            &lt; {{ snippet.language }} &gt;
+                            &middot;
+                            Last modified {{ snippet.last_modified.date }}
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="col-md-12">
+                    Looks like you don't have any snippets yet.
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

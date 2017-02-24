@@ -11,7 +11,7 @@ class Snippet(models.Model):
     title = models.CharField(max_length=64)
     language = models.ForeignKey(Language, related_name='snipes')
     code = models.TextField()
-    author = models.ForeignKey(UserProfile, related_name="snipes")
+    author = models.ForeignKey(UserProfile, related_name='snipes')
     uid = models.UUIDField(default=uuid.uuid4, unique=True)  # TODO: Make a method to generate UUID
     is_private = models.BooleanField(default=False)
     created_at = models.DateTimeField()

@@ -19,6 +19,6 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^', include('apps.core.urls')),
     url(r'^admin/', admin.site.urls),
-    url(r'^(?P<username>[\w{}.-]+)/(?P<uid>[\w{}.-]+)/', include('apps.snippet.urls', namespace='snippets')),
-    url(r'^(?P<username>[\w{}.-]+)/', include('apps.account.urls', namespace='accounts')),
+    url(r'^(?P<username>[\w{}.-]+)/(?P<uid>[\w{}.-]+)/', include('apps.snippet.urls', namespace='snippet')),
+    url(r'^(?P<username>[\w{}.-]+)/', include('apps.account.urls', namespace='account')),
 ]

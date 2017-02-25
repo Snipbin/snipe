@@ -17,7 +17,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 
 urlpatterns = [
-    url(r'^', include('apps.core.urls')),
+    url(r'^', include('apps.core.urls', namespace='core')),
     url(r'^admin/', admin.site.urls),
     url(r'^(?P<username>[\w{}.-]+)/(?P<uid>[\w{}.-]+)/', include('apps.snippet.urls', namespace='snippet')),
     url(r'^(?P<username>[\w{}.-]+)/', include('apps.account.urls', namespace='account')),

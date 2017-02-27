@@ -2,7 +2,7 @@ Here is an inevitably incomplete list of CONTRIBUTORS for Snipe
 This list include people who added feature, fixed bugs, reported bugs and made this project better.
 
 
-<Please add new entries in alphabetical order>
+<Please add new entries>
 
 Ranveer Aggarwal <ranveeraggarwal@gmail.com>
 Dheerendra Rathor <dheeru.rathor14@gmail.com>

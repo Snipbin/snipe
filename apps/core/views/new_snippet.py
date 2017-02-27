@@ -17,6 +17,7 @@ class NewSnippetView(View):
 
     def post(self, request):
         context = dict()
+        context['all_languages'] = Language.objects.all().order_by('name')
         context['errors'] = list()
         post_data = request.POST.dict()
         if post_data['title'] == '':

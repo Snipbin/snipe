@@ -1,5 +1,5 @@
 from django.utils import timezone
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import View
 
 from apps.account.models import UserProfile
@@ -50,6 +50,6 @@ class NewSnippetView(View):
             )
             snippet.save()
 
-            # return render(request, )
+            return redirect('snippet:snippet', username=snippet.author.user.username, uid=snippet.uid.hex)
 
         return render(request, self.homepage, context)

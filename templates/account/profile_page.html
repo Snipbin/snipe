@@ -21,15 +21,15 @@
                 </h5>
                 <hr>
             </div>
-            <div class="col-md-12"><br></div>
             {% for snippet in snippets %}
                 <div class="col-md-12">
+                    <br>
                     <div class="card">
                         <div class="card-header">
                             <h5>{{ snippet.title }}</h5>
                         </div>
                         <div class="card-block">
-                            <p>{{ snippet.code }}</p>
+                            <pre>{{ snippet.code }}</pre>
                         </div>
                         <div class="card-footer text-muted">
                             &lt; {{ snippet.language }} &gt;

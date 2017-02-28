@@ -32,7 +32,7 @@ class NewSnippetView(View):
                 snippet_expiry_date += timezone.timedelta(days=9999999999)  # ToDo: Make this more robust
             else:
                 snippet_expiry_date += timezone.timedelta(days=int(post_data['expiry']))
-            snippet_is_private = False
+            print(post_data['privacy'])
             if post_data['privacy']:
                 snippet_is_private = True
             snippet = Snippet(

@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h5 class="card-title">{{ snippet.title }}</h5>
-                <h6><a href="#">{{ snippet.author.user.first_name }} {{ snippet.author.user.last_name }}</a>
+                <h6><a href="{% url 'account:user' snippet.author.user.username %}">{{ snippet.author.user.first_name }} {{ snippet.author.user.last_name }}</a>
                     &middot; {{ snippet.author.designation }} &middot; {{ snippet.author.organisation }}</h6>
                 {# ToDO: Fix href #}
             </div>

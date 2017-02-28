@@ -26,7 +26,11 @@
                     <br>
                     <div class="card">
                         <div class="card-header">
-                            <h5>{{ snippet.title }}</h5>
+                            <h5>
+                                <a href="{% url 'snippet:snippet' snippet.author.user.username snippet.uid.hex %}">
+                                    {{ snippet.title }}
+                                </a>
+                            </h5>
                         </div>
                         <div class="card-block">
                             <pre>{{ snippet.code }}</pre>

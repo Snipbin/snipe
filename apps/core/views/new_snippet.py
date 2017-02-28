@@ -32,8 +32,11 @@ class NewSnippetView(View):
                 snippet_expiry_date += timezone.timedelta(days=9999999999)  # ToDo: Make this more robust
             else:
                 snippet_expiry_date += timezone.timedelta(days=int(post_data['expiry']))
-            print(post_data['privacy'])
-            if post_data['privacy']:
+            if post_data['privacy'] == "public":
+                snippet_is_private = False
+            elif post_data['privacy'] == "protected":
+                snippet_is_private = True
+            else:
                 snippet_is_private = True
             snippet = Snippet(
                 title=post_data['title'],
@@ -46,5 +49,7 @@ class NewSnippetView(View):
                 expiry_date=snippet_expiry_date,
             )
             snippet.save()
+
+            # return render(request, )
 
         return render(request, self.homepage, context)

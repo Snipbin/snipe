@@ -32,19 +32,25 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/">New Snippet</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                       aria-haspopup="true" aria-expanded="false">
-                        raagga@microsoft.com
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="Preview">
-                        <a class="dropdown-item" href="/raagga">My Snippets</a>
-                        {# ToDO: Fix this URL #}
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Settings</a>
-                        <a class="dropdown-item" href="#">Logout</a>
-                    </div>
-                </li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                           aria-haspopup="true" aria-expanded="false">
+                            {{ user.first_name }} {{ user.last_name }}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="Preview">
+                            <a class="dropdown-item" href="{% url 'account:user' user.username %}">My Snippets</a>
+                            {# ToDO: Fix this URL #}
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Settings</a>
+                            <a class="dropdown-item" href="#">Logout</a>
+                        </div>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Sign In</a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
 

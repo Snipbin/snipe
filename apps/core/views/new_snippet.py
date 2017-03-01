@@ -10,14 +10,18 @@ from apps.snippet.models import Snippet
 class NewSnippetView(View):
     homepage = 'core/index.html'
 
-    def get(self, request):
+    @staticmethod
+    def __build_context():
         context = dict()
         context['all_languages'] = Language.objects.all().order_by('name')
+        return context
+
+    def get(self, request):
+        context = self.__build_context()
         return render(request, self.homepage, context)
 
     def post(self, request):
-        context = dict()
-        context['all_languages'] = Language.objects.all().order_by('name')
+        context = self.__build_context()
         context['errors'] = list()
         post_data = request.POST.dict()
         if post_data['title'] == '':

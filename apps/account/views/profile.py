@@ -14,7 +14,7 @@ class ProfileView(View):
         user_profile = UserProfile.objects.all().filter(user=user).first()
         if user_profile is None:
             return render(request, '404.html', context)
-        context['user'] = user_profile
+        context['user_profile'] = user_profile
         context['snippets'] = user_profile.snipes.all()
         return render(request, self.profile_page, context)
 

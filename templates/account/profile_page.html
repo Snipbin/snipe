@@ -3,7 +3,7 @@
 {% load staticfiles %}
 
 {% block title %}
-    {{ user.user.first_name }} {{ user.user.last_name }} &middot; Snipe
+    {{ user.first_name }} {{ user.last_name }} &middot; Snipe
     {# ToDo: Render from Snippet Object #}
 {% endblock %}
 
@@ -15,10 +15,13 @@
             </div>
             <div class="col-md-11">
                 <h5>
-                    {{ user.user.first_name }} {{ user.user.last_name }}
-                    <br>
-                    <span class="text-muted">{{ user.user.username }}</span>
+                    {{ user.first_name }} {{ user.last_name }}
                 </h5>
+                <h6 class="text-muted">
+                    {{ user.username }}
+                    &middot; {{ user_profile.designation }}
+                    &middot; {{ user_profile.organisation }}
+                </h6>
                 <hr>
             </div>
             {% for snippet in snippets %}

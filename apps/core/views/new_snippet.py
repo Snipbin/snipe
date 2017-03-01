@@ -45,6 +45,7 @@ class NewSnippetView(View):
             snippet = Snippet(
                 title=post_data['title'],
                 language=Language.objects.all().filter(id=int(post_data['language'])).first(),
+                description=post_data['description'],
                 code=post_data['code'],
                 author=UserProfile.objects.all().filter(id=1).first(),
                 is_private=snippet_is_private,

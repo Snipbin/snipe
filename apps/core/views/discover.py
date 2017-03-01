@@ -9,7 +9,7 @@ class DiscoverView(View):
 
     def get(self, request):
         context = dict()
-        snippets = Snippet.objects.all().filter(is_private=False).order_by('last_modified')
+        snippets = Snippet.objects.all().filter(is_private=False).order_by('last_modified').reverse()
         context['snippets'] = snippets
         return render(request, self.discover_page, context)
 

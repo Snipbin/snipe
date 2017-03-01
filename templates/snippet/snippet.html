@@ -30,6 +30,9 @@
                 <hr>
             </div>
             <div class="col-md-12">
+                <p>{{ snippet.description }}</p>
+            </div>
+            <div class="col-md-12">
                 <pre class=""><code
                         class="language-{{ snippet.language | lower }} line-numbers language-markup">{{ snippet.code }}</code></pre>
             </div>
@@ -40,7 +43,7 @@
                 <h6 class="text-muted">&lt; {{ snippet.language }} &gt;</h6>
             </div>
             <div class="col-md-6">
-                <p class="text-md-right text-muted">Last Modified {{ snippet.last_modified }}</p>
+                <p class="text-md-right text-muted">Last Modified {{ snippet.last_modified.date }}</p>
             </div>
         </div>
     </div>

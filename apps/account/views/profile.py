@@ -15,7 +15,7 @@ class ProfileView(View):
         if user_profile is None:
             return render(request, '404.html', context)
         context['user_profile'] = user_profile
-        context['snippets'] = user_profile.snipes.all()
+        context['snippets'] = user_profile.snipes.all().order_by('last_modified').reverse()
         return render(request, self.profile_page, context)
 
     def post(self):

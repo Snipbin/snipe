@@ -32,6 +32,9 @@
                             </a>
                         </h5>
                     </div>
+                    <div class="card-block">
+                        {{ snippet.description }}
+                    </div>
                     <div class="card-block" style="padding: 0;">
                             <pre style="margin: 0; border-radius: 0"><code
                                     class="language-{{ snippet.language | lower }} line-numbers language-markup">{{ snippet.code }}</code></pre>
@@ -49,4 +52,5 @@
             </div>
         {% endfor %}
     </div>
+    <br>
 {% endblock %}

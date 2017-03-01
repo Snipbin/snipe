@@ -2,6 +2,14 @@
 
 {% load staticfiles %}
 
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/prism.css' %}">
+{% endblock %}
+
+{% block javascript %}
+    <script src="{% static 'javascript/prism.js' %}"></script>
+{% endblock %}
+
 {% block title %}
     Snipe &middot; Discover
 {% endblock %}
@@ -24,8 +32,9 @@
                             </a>
                         </h5>
                     </div>
-                    <div class="card-block">
-                        <pre>{{ snippet.code }}</pre>
+                    <div class="card-block" style="padding: 0;">
+                            <pre style="margin: 0; border-radius: 0"><code
+                                    class="language-{{ snippet.language | lower }} line-numbers language-markup">{{ snippet.code }}</code></pre>
                     </div>
                     <div class="card-footer text-muted">
                         &lt; {{ snippet.language }} &gt;
@@ -34,7 +43,7 @@
                     </div>
                 </div>
             </div>
-            {% empty %}
+        {% empty %}
             <div class="col-md-12">
                 Looks like there ain't any snippets yet.
             </div>

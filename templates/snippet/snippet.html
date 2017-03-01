@@ -2,9 +2,16 @@
 
 {% load staticfiles %}
 
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/prism.css' %}">
+{% endblock %}
+
+{% block javascript %}
+    <script src="{% static 'javascript/prism.js' %}"></script>
+{% endblock %}
+
 {% block title %}
     Snipe &middot; {{ snippet.title }}
-    {# ToDo: Render from Snippet Object #}
 {% endblock %}
 
 {% block body_main %}
@@ -23,7 +30,7 @@
                 <hr>
             </div>
             <div class="col-md-12">
-                <pre>{{ snippet.code }}</pre>
+                <pre class=""><code class="language-{{ snippet.language | lower }} line-numbers language-markup">{{ snippet.code }}</code></pre>
             </div>
             <div class="col-md-12">
                 <hr>

@@ -10,6 +10,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    {% block css %} {% endblock %}
 </head>
 <body>
 <header>
@@ -75,5 +76,6 @@
 <script src="{% static 'javascript/jquery-3.1.1.slim.min.js' %}"></script>
 <script src="{% static 'javascript/tether.min.js' %}"></script>
 <script src="{% static 'javascript/bootstrap.min.js' %}"></script>
+{% block javascript %} {% endblock %}
 </body>
 </html>

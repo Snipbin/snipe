@@ -2,7 +2,7 @@ from django.utils import timezone
 from django.shortcuts import render, redirect
 from django.views.generic import View
 
-from apps.account.models import UserProfile
+from apps.account.models import SnipeUser
 from apps.core.models import Language
 from apps.snippet.models import Snippet
 
@@ -47,7 +47,7 @@ class NewSnippetView(View):
                 language=Language.objects.all().filter(id=int(post_data['language'])).first(),
                 description=post_data['description'],
                 code=post_data['code'],
-                author=UserProfile.objects.all().filter(id=1).first(),
+                author=SnipeUser.objects.all().filter(id=1).first(),
                 is_private=snippet_is_private,
                 created_at=snippet_created_date,
                 last_modified=snippet_created_date,

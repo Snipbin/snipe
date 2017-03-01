@@ -1,12 +1,15 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AbstractUser
 from django.db import models
 
 
-class UserProfile(models.Model):
-    user = models.OneToOneField(User, related_name='user_profile')
-    picture = models.ImageField()
-    organisation = models.CharField(max_length=256)
-    designation = models.CharField(max_length=256)
+class SnipeUser(AbstractUser):
+    """
+    username is AAD object_id
+    """
 
-    def __str__(self):
-        return self.user.username
+    tenant_id = models.CharField(max_length=64)
+    refresh_token = models.TextField(null=True, blank=True)
+
+    job_title = models.CharField(max_length=256, null=True, blank=True)
+    department = models.CharField(max_length=256, null=True, blank=True)
+    picture = models.ImageField(null=True, blank=True)

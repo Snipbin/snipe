@@ -15,10 +15,14 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from apps.snippet import urls as snippet_urls
+from apps.account import urls as account_urls
+from apps.authentication import urls as auth_urls
 
 urlpatterns = [
     url(r'^', include('apps.core.urls', namespace='core')),
     url(r'^admin/', admin.site.urls),
-    url(r'^(?P<username>[\w{}.-]+)/(?P<uid>[\w{}.-]+)/', include('apps.snippet.urls', namespace='snippet')),
-    url(r'^(?P<username>[\w{}.-]+)/', include('apps.account.urls', namespace='account')),
+    url(r'^auth/', include(auth_urls, namespace='authentication')),
+    url(r'^(?P<username>[\w{}.-]+)/(?P<uid>[\w{}.-]+)/', include(snippet_urls, namespace='snippet')),
+    url(r'^(?P<username>[\w{}.-]+)/', include(account_urls, namespace='account')),
 ]

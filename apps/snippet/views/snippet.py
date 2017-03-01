@@ -13,8 +13,9 @@ class SnippetView(View):
     def get(self, request, username, uid):
         context = dict()
         if self.is_valid_uuid(uid):
-            snippet = Snippet.objects.all().filter(uid=uid, author__user__username=username)\
-                .prefetch_related('language', 'author').first()
+            snippet = Snippet.objects.all().filter(
+                uid=uid, author__user__username=username
+            ).prefetch_related('language', 'author').first()
             if snippet is not None:
                 context['snippet'] = snippet
                 return render(request, self.snippet_page, context)
@@ -32,5 +33,3 @@ class SnippetView(View):
             return False
 
         return str(uuid_obj).replace('-', '') == uuid_to_test
-
-

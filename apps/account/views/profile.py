@@ -1,8 +1,7 @@
-from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.views import View
 
-from apps.account.models import UserProfile
+from apps.account.models import SnipeUser
 
 
 class ProfileView(View):
@@ -10,12 +9,10 @@ class ProfileView(View):
 
     def get(self, request, username):
         context = dict()
-        user = User.objects.all().filter(username=username).first()
-        user_profile = UserProfile.objects.all().filter(user=user).first()
-        if user_profile is None:
+        user = SnipeUser.objects.all().filter(username=username).first()
+        if user is None:
             return render(request, '404.html', context)
-        context['user_profile'] = user_profile
-        context['snippets'] = user_profile.snipes.all().order_by('last_modified').reverse()
+        context['snippets'] = user.snipes.all().order_by('last_modified').reverse()
         return render(request, self.profile_page, context)
 
     def post(self):

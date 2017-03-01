@@ -3,7 +3,7 @@
 {% load staticfiles %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'css/prism.css' %}">
+    <link rel="stylesheet" href="{% static 'css/prism.css' %}">
 {% endblock %}
 
 {% block javascript %}
@@ -30,7 +30,8 @@
                 <hr>
             </div>
             <div class="col-md-12">
-                <pre class=""><code class="language-{{ snippet.language | lower }} line-numbers language-markup">{{ snippet.code }}</code></pre>
+                <pre class=""><code
+                        class="language-{{ snippet.language | lower }} line-numbers language-markup">{{ snippet.code }}</code></pre>
             </div>
             <div class="col-md-12">
                 <hr>

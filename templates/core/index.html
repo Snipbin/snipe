@@ -2,6 +2,26 @@
 
 {% load staticfiles %}
 
+{% comment %}
+{% block javascript %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.6/ace.js"></script>
+    <script>
+        var editor = ace.edit("editor");
+        editor.setTheme("ace/theme/monokai");
+        editor.getSession().setMode("ace/mode/javascript");
+    </script>
+{% endblock %}
+
+{% block css %}
+    <style type="text/css" media="screen">
+        #editor {
+            width:100%;
+            height: 500px;
+        }
+    </style>
+{% endblock %}
+{% endcomment %}
+
 {% block title %}
     Snipe &middot; Home
 {% endblock %}
@@ -37,6 +57,11 @@
                         <textarea placeholder="Snippet Data" name="code" id="snip-code" class="form-control"
                                   rows="16"></textarea>
                     </div>
+                    {% comment %}
+                    <div class="form-group">
+                        <div id="editor">function foo(items) { var x = "All this is syntax highlighted"; return x;}</div>
+                    </div>
+                    {% endcomment %}
 
                     <div class="row">
                         <div class="col-md-6">

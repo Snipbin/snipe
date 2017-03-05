@@ -1,10 +1,10 @@
 import adal
+import requests
 from adal import AdalError
 from django.conf import settings
 from django.contrib.auth import login
 from django.core.exceptions import PermissionDenied
 from django.http import HttpRequest
-from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.views import View
@@ -54,19 +54,35 @@ class AdalRedirectHandlerView(View):
                 settings.ADAL_APP_SECRET,
             )
         except AdalError as ex:
-            raise PermissionDenied
+            raise PermissionDenied(ex)
 
-        user_oid = token["oid"]
+        access_token = token['accessToken']
+
+        # Get graph data
+        data = requests.get("https://graph.windows.net/me",
+                            params={
+                                "api-version": "1.6",
+                            },
+                            headers={
+                                "Authorization": "Bearer {0}".format(access_token),
+                            })
+        me = data.json()
+
+        user_oid = me["objectId"]
         tenant_id = token["tenantId"]
         refresh_token = token['refreshToken']
+        alias = me['mailNickname'] if me['mailNickname'] else me['mail']
 
         user, _ = SnipeUser.objects.update_or_create(
-            username=user_oid, tenant_id=tenant_id,
+            username=alias, tenant_id=tenant_id,
             defaults={
+                'object_id': user_oid,
                 'refresh_token': refresh_token,
-                'email': token['userId'],
-                'first_name': token['givenName'],
-                'last_name': token['familyName'],
+                'email': me['mail'],
+                'first_name': me['givenName'],
+                'last_name': me['surname'],
+                'job_title': me['jobTitle'],
+                'department': me['department'],
             })
 
         login(request, user, backend=settings.AUTHENTICATION_BACKENDS[0])

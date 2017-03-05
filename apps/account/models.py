@@ -7,6 +7,7 @@ class SnipeUser(AbstractUser):
     username is AAD object_id
     """
 
+    object_id = models.CharField(max_length=64)
     tenant_id = models.CharField(max_length=64)
     refresh_token = models.TextField(null=True, blank=True)
 

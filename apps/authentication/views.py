@@ -2,7 +2,7 @@ import adal
 import requests
 from adal import AdalError
 from django.conf import settings
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from django.core.exceptions import PermissionDenied
 from django.http import HttpRequest
 from django.shortcuts import redirect
@@ -88,3 +88,10 @@ class AdalRedirectHandlerView(View):
         login(request, user, backend=settings.AUTHENTICATION_BACKENDS[0])
 
         return redirect('account:user', username=user.username)
+
+
+class LogoutView(View):
+
+    def post(self, request):
+        logout(request)
+        return redirect('/')

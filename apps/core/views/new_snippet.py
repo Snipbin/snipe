@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils import timezone
 from django.shortcuts import render, redirect
 from django.views.generic import View
@@ -7,8 +9,10 @@ from apps.core.models import Language
 from apps.snippet.models import Snippet
 
 
-class NewSnippetView(View):
+class NewSnippetView(LoginRequiredMixin, View):
     homepage = 'core/index.html'
+    login_url = '/auth/login/'
+    redirect_field_name = 'redirect'
 
     @staticmethod
     def __build_context():

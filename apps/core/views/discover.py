@@ -1,11 +1,14 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views import View
 
 from apps.snippet.models import Snippet
 
 
-class DiscoverView(View):
+class DiscoverView(LoginRequiredMixin, View):
     discover_page = 'snippet/discover.html'
+    login_url = '/auth/login/'
+    redirect_field_name = 'redirect'
 
     def get(self, request):
         context = dict()

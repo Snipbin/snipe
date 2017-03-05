@@ -1,11 +1,14 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views import View
 
 from apps.account.models import SnipeUser
 
 
-class ProfileView(View):
+class ProfileView(LoginRequiredMixin, View):
     profile_page = 'account/profile_page.html'
+    login_url = '/auth/login/'
+    redirect_field_name = 'redirect'
 
     def get(self, request, username):
         context = dict()

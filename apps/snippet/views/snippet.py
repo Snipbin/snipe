@@ -1,14 +1,17 @@
 from uuid import UUID
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views.generic import View
 
 from apps.snippet.models import Snippet
 
 
-class SnippetView(View):
+class SnippetView(LoginRequiredMixin, View):
     snippet_page = 'snippet/snippet.html'
     error_404_page = '404.html'
+    login_url = '/auth/login/'
+    redirect_field_name = 'redirect'
 
     def get(self, request, username, uid):
         context = dict()

@@ -41,11 +41,11 @@ class NewSnippetView(LoginRequiredMixin, View):
             else:
                 snippet_expiry_date += timezone.timedelta(days=int(post_data['expiry']))
             if post_data['privacy'] == "public":
-                snippet_is_private = False
-            elif post_data['privacy'] == "protected":
-                snippet_is_private = True
+                snippet_is_private = 'PUBLIC'
+            elif post_data['privacy'] == "link":
+                snippet_is_private = 'LINK'
             else:
-                snippet_is_private = True
+                snippet_is_private = 'PRIVATE'
             snippet = Snippet(
                 title=post_data['title'],
                 language=Language.objects.all().filter(id=int(post_data['language'])).first(),

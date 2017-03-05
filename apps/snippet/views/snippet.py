@@ -17,7 +17,7 @@ class SnippetView(LoginRequiredMixin, View):
         context = dict()
         if self.is_valid_uuid(uid):
             snippet = Snippet.objects.all().filter(
-                uid=uid, author__user__username=username
+                uid=uid, author__user__username=username, is_private__in=['PUBLIC', 'LINK']
             ).prefetch_related('language', 'author').first()
             if snippet is not None:
                 context['snippet'] = snippet

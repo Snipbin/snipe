@@ -15,7 +15,7 @@ class ProfileView(LoginRequiredMixin, View):
         user = SnipeUser.objects.all().filter(username=username).first()
         if user is None:
             return render(request, '404.html', context)
-        context['snippets'] = user.snipes.all().order_by('last_modified').reverse()
+        context['snippets'] = user.snipes.all().filter(is_private='PUBLIC').order_by('last_modified').reverse()
         return render(request, self.profile_page, context)
 
     def post(self):

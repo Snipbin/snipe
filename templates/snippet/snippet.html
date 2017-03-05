@@ -21,10 +21,10 @@
             <div class="col-md-12">
                 <h5 class="card-title">{{ snippet.title }}</h5>
                 <h6>
-                    <a href="{% url 'account:user' snippet.author.user.username %}">
-                        {{ snippet.author.user.first_name }} {{ snippet.author.user.last_name }}
+                    <a href="{% url 'account:user' snippet.author.username %}">
+                        {{ snippet.author.first_name }} {{ snippet.author.last_name }}
                     </a>
-                    &middot; {{ snippet.author.designation }} &middot; {{ snippet.author.organisation }}</h6>
+                    &middot; {{ snippet.author.job_title }} &middot; {{ snippet.author.department }}</h6>
             </div>
             <div class="col-md-12">
                 <hr>

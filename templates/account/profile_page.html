@@ -12,16 +12,13 @@
 
 {% block title %}
     {{ user.first_name }} {{ user.last_name }} &middot; Snipe
-    {# ToDo: Render from Snippet Object #}
 {% endblock %}
 
 {% block body_main %}
     <br>
     <div class="container">
         <div class="row">
-            <div class="col-md-1" style="background-color: #4b5257">
-            </div>
-            <div class="col-md-11">
+            <div class="col-md-12">
                 <h5>
                     {{ user.first_name }} {{ user.last_name }}
                 </h5>
@@ -38,7 +35,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h5>
-                                <a href="{% url 'snippet:snippet' snippet.author.user.username snippet.uid.hex %}">
+                                <a href="{% url 'snippet:snippet' snippet.author.username snippet.uid.hex %}">
                                     {{ snippet.title }}
                                 </a>
                             </h5>

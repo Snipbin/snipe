@@ -51,7 +51,7 @@ class NewSnippetView(LoginRequiredMixin, View):
                 language=Language.objects.all().filter(id=int(post_data['language'])).first(),
                 description=post_data['description'],
                 code=post_data['code'],
-                author=SnipeUser.objects.all().filter(id=1).first(),
+                author=request.user,
                 is_private=snippet_is_private,
                 created_at=snippet_created_date,
                 last_modified=snippet_created_date,
@@ -59,6 +59,6 @@ class NewSnippetView(LoginRequiredMixin, View):
             )
             snippet.save()
 
-            return redirect('snippet:snippet', username=snippet.author.user.username, uid=snippet.uid.hex)
+            return redirect('snippet:snippet', username=snippet.author.username, uid=snippet.uid.hex)
 
         return render(request, self.homepage, context)

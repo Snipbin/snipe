@@ -14,7 +14,7 @@ from apps.account.models import SnipeUser
 
 def get_adal_authority() -> str:
     tenant_id = settings.ADAL_TENANT_ID
-    return f"https://login.microsoftonline.com/{tenant_id}"
+    return "https://login.microsoftonline.com/{}".format(tenant_id)
 
 
 def get_redirect_uri(request: HttpRequest) -> str:
@@ -29,11 +29,11 @@ class AdalLoginView(View):
         tenant_id = settings.ADAL_TENANT_ID
         client_id = settings.ADAL_APP_ID
         redirect_uri = get_redirect_uri(self.request)
-        adal_auth_url = (f"https://login.microsoftonline.com/{tenant_id}/oauth2/authorize?"
+        adal_auth_url = ("https://login.microsoftonline.com/{}/oauth2/authorize?"
                          "response_type=code&"
-                         f"client_id={client_id}&"
-                         f"redirect_uri={redirect_uri}&"
-                         )
+                         "client_id={}&"
+                         "redirect_uri={}&"
+                         ).format(tenant_id, client_id, redirect_uri)
         return adal_auth_url
 
 

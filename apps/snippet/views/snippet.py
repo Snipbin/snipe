@@ -8,7 +8,7 @@ from apps.snippet.models import Snippet
 
 
 class SnippetView(LoginRequiredMixin, View):
-    snippet_page = 'snippet/snippet.html'
+    snippet_page = 'snippet/view.html'
     error_404_page = '404.html'
     login_url = '/auth/login/'
     redirect_field_name = 'redirect'

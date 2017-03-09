@@ -94,4 +94,4 @@ class LogoutView(View):
 
     def post(self, request):
         logout(request)
-        return redirect('/')
+        return redirect('/home')

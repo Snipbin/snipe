@@ -14,3 +14,7 @@ class SnipeUser(AbstractUser):
     job_title = models.CharField(max_length=256, null=True, blank=True)
     department = models.CharField(max_length=256, null=True, blank=True)
     picture = models.ImageField(null=True, blank=True)
+
+    # @property
+    # def is_authenticated(self):
+    #     return True

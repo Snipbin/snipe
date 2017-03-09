@@ -10,7 +10,7 @@ from apps.snippet.models import Snippet
 
 
 class NewSnippetView(LoginRequiredMixin, View):
-    homepage = 'core/index.html'
+    homepage = 'snippet/new.html'
     login_url = '/auth/login/'
     redirect_field_name = 'redirect'
 

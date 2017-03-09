@@ -20,9 +20,9 @@ from apps.account import urls as account_urls
 from apps.authentication import urls as auth_urls
 
 urlpatterns = [
-    url(r'^', include('apps.core.urls', namespace='core')),
     url(r'^admin/', admin.site.urls),
     url(r'^auth/', include(auth_urls, namespace='authentication')),
-    url(r'^(?P<username>[\w{}.-]+)/(?P<uid>[\w{}.-]+)/', include(snippet_urls, namespace='snippet')),
+    url(r'^home/', include('apps.core.urls', namespace='core')),
+    url(r'^', include(snippet_urls, namespace='snippet')),
     url(r'^(?P<username>[\w{}.-]+)/', include(account_urls, namespace='account')),
 ]

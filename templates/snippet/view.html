@@ -4,6 +4,7 @@
 
 {% block css %}
     <link rel="stylesheet" href="{% static 'css/prism.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
 {% endblock %}
 
 {% block javascript %}
@@ -11,7 +12,7 @@
 {% endblock %}
 
 {% block title %}
-    Snipe &middot; {{ snippet.title }}
+    SnipBin &middot; {{ snippet.title }}
 {% endblock %}
 
 {% block body_main %}
@@ -29,8 +30,14 @@
             <div class="col-md-12">
                 <hr>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <p>{{ snippet.description }}</p>
+            </div>
+            <div class="col-md-6">
+                <div class="float-md-right">
+                    <button class="btn btn-outline-danger" style="color: #000000"><i class="fa fa-trash"></i> Delete</button>
+                    <button class="btn btn-outline-success" style="color: #000000"><i class="fa fa-pencil"></i> Edit</button>
+                </div>
             </div>
             <div class="col-md-12">
                 <pre class=""><code

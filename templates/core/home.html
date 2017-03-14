@@ -1,10 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h1>ZEES EEZ ZEE HOME PAAZE</h1>
-</body>
-</html>
+{% extends "base_template.html" %}
+
+{% load staticfiles %}
+
+{% block title %}
+    SnipBin &middot; Home
+{% endblock %}
+
+{% block body_main %}
+    <div class="container text-center" style="height: inherit;">
+        <div style="padding-top: 15%">
+            <h1 style="font-weight: 100; font-size: 50px;">SnipBin</h1>
+            <h3 style="font-weight: 100">Instantly share code snippets and notes in your organisation.</h3>
+            <hr>
+            <a href="{% url 'authentication:login' %}" class="btn btn-primary"> Login to Begin</a>
+        </div>
+    </div>
+{% endblock %}

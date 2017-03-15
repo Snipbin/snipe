@@ -11,7 +11,6 @@ from apps.snippet.models import Snippet
 
 class NewSnippetView(LoginRequiredMixin, View):
     homepage = 'snippet/new.html'
-    login_url = '/auth/login/'
     redirect_field_name = 'redirect'
 
     @staticmethod

@@ -7,7 +7,6 @@ from apps.snippet.models import Snippet
 
 class DiscoverView(LoginRequiredMixin, View):
     discover_page = 'snippet/discover.html'
-    login_url = '/auth/login/'
     redirect_field_name = 'redirect'
 
     def get(self, request):

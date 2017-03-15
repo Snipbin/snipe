@@ -7,7 +7,6 @@ from apps.account.models import SnipeUser
 
 class ProfileView(LoginRequiredMixin, View):
     profile_page = 'account/profile_page.html'
-    login_url = '/auth/login/'
     redirect_field_name = 'redirect'
 
     def get(self, request, username):

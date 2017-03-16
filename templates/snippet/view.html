@@ -35,8 +35,10 @@
             </div>
             <div class="col-md-6">
                 <div class="float-md-right">
-                    <button class="btn btn-outline-danger" style="color: #000000"><i class="fa fa-trash"></i> Delete</button>
-                    <button class="btn btn-outline-success" style="color: #000000"><i class="fa fa-pencil"></i> Edit</button>
+                    <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal" style="color: #000000"><i
+                                class="fa fa-trash"></i> Delete
+                        </button>
+                    <a class="btn btn-outline-success" style="color: #000000"><i class="fa fa-pencil"></i> Edit</a>
                 </div>
             </div>
             <div class="col-md-12">
@@ -53,5 +55,33 @@
                 <p class="text-md-right text-muted">Last Modified {{ snippet.last_modified.date }}</p>
             </div>
         </div>
+        <!-- Modal -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Are you sure?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        I mean, this will totally delete your snippet - no coming back.
+                    </div>
+                    <div class="modal-footer">
+                        <form method="post" action="{% url 'snippet:snippet_delete' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="uid" value="{{ snippet.uid.hex }}">
+                            <button type="submit" class="btn btn-outline-danger" style="color: #000000"><i
+                                    class="fa fa-trash"></i> Delete
+                            </button>
+                            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal" style="color: #000000">Close</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 {% endblock %}

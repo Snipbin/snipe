@@ -1,10 +1,8 @@
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.utils import timezone
 from django.shortcuts import render, redirect
+from django.utils import timezone
 from django.views.generic import View
 
-from apps.account.models import SnipeUser
 from apps.core.models import Language
 from apps.snippet.models import Snippet
 

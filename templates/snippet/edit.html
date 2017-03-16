@@ -1,0 +1,95 @@
+{% extends "base_template.html" %}
+
+{% load staticfiles %}
+
+{% block title %}
+    SnipBin &middot; Editing Snippet
+{% endblock %}
+
+{% block body_main %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <br>
+                <form method="post" action="{% url 'snippet:snippet_edit' snippet.author.username snippet.uid.hex %}">
+                    {% csrf_token %}
+                    <h5>New Snippet</h5>
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input id="snip-title" name="title" placeholder="Filename" class="form-control"
+                                       type="text" value="{{ snippet.title }}">
+                            </div>
+                        </div>
+                        <div class="col-md-4 offset-md-2">
+                            <div class="form-group" style="width: inherit">
+                                <select name="language" class="custom-select" style="width: inherit" title="Language">
+                                    {% for language in all_languages %}
+                                        <option value="{{ language.id }}"
+                                        {% if language == snippet.language %}
+                                            selected="selected"
+                                        {% endif %}
+                                        >
+                                            {{ language.name }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="Snippet Description" name="description"
+                                  id="snip-description" class="form-control" rows="2">{{ snippet.description }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="// Code" name="code" id="snip-code" class="form-control"
+                                  rows="16">{{ snippet.code }}</textarea>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Optional Settings</h5>
+                            <hr>
+                            <div class="form-group" style="width: inherit">
+                                <select class="custom-select" name="expiry" id="snip-expiry" title="Expiry"
+                                        style="width: inherit">
+                                    <option selected value="0">Never Expire</option>
+                                    <option value="7">Expire in One Week</option>
+                                    <option value="14">Expire in Two Weeks</option>
+                                    <option value="30">Expire in One Month</option>
+                                    <option value="365">Expire in One Year</option>
+                                </select>
+                            </div>
+                            <div class="form-group" style="width: inherit">
+                                <select class="custom-select" name="privacy" id="snip-privacy" title="Expiry"
+                                        style="width: inherit">
+                                    <option selected value="public">Visible to Everyone</option>
+                                    <option value="private">Visible to Just Me</option>
+                                    <option value="link">Visible to People With Link</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group" style="width: inherit">
+                                <input class="btn btn-outline-success mb-4" type="submit" style="width: inherit"
+                                       value="Finish Editing Snippet">
+                            </div>
+                            {% for error in errors %}
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

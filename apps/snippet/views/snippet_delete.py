@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseForbidden
 from django.shortcuts import redirect
 from django.views.generic import View
 
@@ -18,4 +19,6 @@ class SnippetDeleteView(LoginRequiredMixin, View):
             snippet = Snippet.objects.all().filter(uid=post_data['uid']).first()
             if request.user == snippet.author:
                 snippet.delete()
+            else:
+                return HttpResponseForbidden()
         return redirect('snippet:new')

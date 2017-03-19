@@ -29,3 +29,8 @@ class Snippet(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Bookmark(models.Model):
+    snippet = models.ForeignKey(Snippet, related_name='snippet')
+    user = models.ForeignKey(SnipeUser, related_name='user')

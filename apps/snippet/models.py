@@ -27,6 +27,9 @@ class Snippet(models.Model):
     expiry_date = models.DateTimeField()
     _history_ = HistoricalRecords()
 
+    def is_author_private(self):
+        return self.is_private == 'PRIVATE'
+
     def __str__(self):
         return self.title
 

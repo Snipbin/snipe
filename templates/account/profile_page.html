@@ -35,14 +35,16 @@
                     <div class="card">
                         <div class="card-header">
                             <h5>
-                                <a href="{% url 'snippet:snippet' snippet.author.username snippet.uid.hex %}">
+                                <a href="{% url 'snippet:snippet' snippet.uid.hex %}">
                                     {{ snippet.title }}
                                 </a>
                             </h5>
                         </div>
-                        <div class="card-block">
-                            {{ snippet.description }}
-                        </div>
+                        {% if snippet.description %}
+                            <div class="card-block">
+                                {{ snippet.description }}
+                            </div>
+                        {% endif %}
                         <div class="card-block" style="padding: 0;">
                             <pre style="margin: 0; border-radius: 0"><code
                                     class="language-{{ snippet.language | lower }} line-numbers language-markup">{{ snippet.code }}</code></pre>

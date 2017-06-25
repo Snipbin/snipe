@@ -23,6 +23,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^auth/', include(auth_urls, namespace='authentication')),
     url(r'^home/', include('apps.core.urls', namespace='core')),
+    url(r'^u/(?P<username>[\w{}.-]+)/', include(account_urls, namespace='account')),
     url(r'^', include(snippet_urls, namespace='snippet')),
-    url(r'^(?P<username>[\w{}.-]+)/', include(account_urls, namespace='account')),
 ]

@@ -8,17 +8,10 @@ from apps.snippet.models import Snippet
 
 class SnippetDeleteView(LoginRequiredMixin, View):
 
-    def get(self, request):
-        pass
-
-    def post(self, request):
-        post_data = request.POST.dict()
-        if post_data['uid'] == '':
-            return redirect('snippet:new')
+    def post(self, request, uid):
+        snippet = Snippet.objects.all().filter(uid=uid).first()
+        if request.user.id == snippet.author_id:
+            snippet.delete()
         else:
-            snippet = Snippet.objects.all().filter(uid=post_data['uid']).first()
-            if request.user == snippet.author:
-                snippet.delete()
-            else:
-                return HttpResponseForbidden()
+            return HttpResponseForbidden()
         return redirect('snippet:new')

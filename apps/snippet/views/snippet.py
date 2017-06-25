@@ -1,6 +1,7 @@
 from uuid import UUID
 
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import Http404, HttpResponseForbidden
 from django.shortcuts import render
 from django.views.generic import View
 
@@ -9,23 +10,22 @@ from apps.snippet.models import Snippet
 
 class SnippetView(LoginRequiredMixin, View):
     snippet_page = 'snippet/view.html'
-    error_404_page = '404.html'
-    redirect_field_name = 'redirect'
 
-    def get(self, request, username, uid):
+    def get(self, request, uid):
         context = dict()
         if self.is_valid_uuid(uid):
-            snippet = Snippet.objects.all().filter(
-                uid=uid, author__username=username, is_private__in=['PUBLIC', 'LINK']
+            snippet: Snippet = Snippet.objects.all().filter(
+                uid=uid,
             ).prefetch_related('language', 'author').first()
             if snippet is not None:
+                if snippet.is_author_private() and snippet.author_id != request.user.id:
+                    return HttpResponseForbidden()
                 context['snippet'] = snippet
                 return render(request, self.snippet_page, context)
+            else:
+                raise Http404()
         else:
-            return render(request, self.error_404_page, context)
-
-    def post(self, request):
-        pass
+            raise Http404()
 
     @staticmethod
     def is_valid_uuid(uuid_to_test, version=4):

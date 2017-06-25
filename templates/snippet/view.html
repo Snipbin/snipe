@@ -39,7 +39,7 @@
                             style="color: #000000"><i
                             class="fa fa-trash"></i> Delete
                     </button>
-                    <a class="btn btn-outline-success" href="{% url 'snippet:snippet_edit' snippet.author.username snippet.uid.hex %}" style="color: #000000"><i class="fa fa-pencil"></i> Edit</a>
+                    <a class="btn btn-outline-success" href="{% url 'snippet:snippet_edit' snippet.uid.hex %}" style="color: #000000"><i class="fa fa-pencil"></i> Edit</a>
                 </div>
             </div>
             <div class="col-md-12">
@@ -71,9 +71,8 @@
                         I mean, this will totally delete your snippet - no coming back.
                     </div>
                     <div class="modal-footer">
-                        <form method="post" action="{% url 'snippet:snippet_delete' %}">
+                        <form method="post" action="{% url 'snippet:snippet_delete' snippet.uid.hex %}">
                             {% csrf_token %}
-                            <input type="hidden" name="uid" value="{{ snippet.uid.hex }}">
                             <button type="submit" class="btn btn-outline-danger" style="color: #000000"><i
                                     class="fa fa-trash"></i> Delete
                             </button>

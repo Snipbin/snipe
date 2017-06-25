@@ -56,6 +56,6 @@ class NewSnippetView(LoginRequiredMixin, View):
             )
             snippet.save()
 
-            return redirect('snippet:snippet', username=snippet.author.username, uid=snippet.uid.hex)
+            return redirect('snippet:snippet', uid=snippet.uid.hex)
 
         return render(request, self.homepage, context)

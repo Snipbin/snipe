@@ -6,6 +6,7 @@ from django.views.generic import View
 
 from apps.core.models import Language
 from apps.snippet.models import Snippet
+from apps.snippet.serializers import SnippetEditSerializer
 
 
 class SnippetEditView(LoginRequiredMixin, View):
@@ -37,34 +38,21 @@ class SnippetEditView(LoginRequiredMixin, View):
         context = dict()
         context['errors'] = list()
         context['all_languages'] = Language.objects.order_by('name')
-        post_data = request.POST.dict()
-        if post_data['title'] == '':
-            context['errors'].append("Error: No title specified.")
-        if post_data['code'] == '':
-            context['errors'].append("Error: This doesn't contain any code.")
 
-        if len(context['errors']) == 0:
-            snippet_modified_date = timezone.now()
+        serialized_data = SnippetEditSerializer(data=request.POST, instance=snippet)
+        if serialized_data.is_valid():
+            instance: Snippet = serialized_data.instance
             snippet_expiry_date = timezone.now()
-            if post_data['expiry'] == 0:
-                snippet_expiry_date += timezone.timedelta(days=9999999999)  # ToDo: Make this more robust
-            else:  # Question: why it should increase everytime?
-                snippet_expiry_date += timezone.timedelta(days=int(post_data['expiry']))
-            if post_data['privacy'] == "public":
-                snippet_is_private = 'PUBLIC'
-            elif post_data['privacy'] == "link":
-                snippet_is_private = 'LINK'
+            expiry_field = serialized_data.validated_data['expiry']
+            if expiry_field == 0:
+                snippet_expiry_date += timezone.timedelta(days=999999)  # ToDo: Make this more robust
             else:
-                snippet_is_private = 'PRIVATE'
-            snippet.title = post_data['title']
-            snippet.description = post_data['description']
-            snippet.language = Language.objects.all().filter(id=int(post_data['language'])).first()
-            snippet.code = post_data['code']
-            snippet.is_private = snippet_is_private
-            snippet.last_modified = snippet_modified_date
-            snippet.expiry_date = snippet_expiry_date
-            snippet.save()
+                snippet_expiry_date += timezone.timedelta(days=expiry_field)
+            instance.expiry_date = snippet_expiry_date
+            instance.last_modified = timezone.now()
             return redirect('snippet:snippet', uid=snippet.uid.hex)
+        else:
+            context['errors'] = serialized_data.errors
 
         context['snippet'] = snippet
         return render(request, self.edit_page, context)

@@ -1,6 +1,7 @@
 from uuid import UUID
 
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Count
 from django.http import Http404, HttpResponseForbidden
 from django.shortcuts import render
 from django.views.generic import View
@@ -16,7 +17,9 @@ class SnippetView(LoginRequiredMixin, View):
         if self.is_valid_uuid(uid):
             snippet: Snippet = Snippet.objects.all().filter(
                 uid=uid,
-            ).prefetch_related('language', 'author').first()
+            ).prefetch_related('language', 'author').annotate(
+                bookmarks_count=Count('bookmarks'),
+            ).first()
             if snippet is not None:
                 if snippet.is_author_private() and snippet.author_id != request.user.id:
                     return HttpResponseForbidden()

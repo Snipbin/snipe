@@ -9,7 +9,6 @@ from apps.snippet.serializers import SnippetEditSerializer
 
 class NewSnippetView(LoginRequiredMixin, View):
     homepage = 'snippet/new.html'
-    redirect_field_name = 'redirect'
 
     @staticmethod
     def _build_context():

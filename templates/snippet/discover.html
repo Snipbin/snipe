@@ -21,38 +21,7 @@
             <h4>Latest Snippets</h4>
             <hr>
         </div>
-        {% for snippet in snippets %}
-            <div class="col-md-12">
-                <br>
-                <div class="card">
-                    <div class="card-header">
-                        <h5>
-                            <a href="{% url 'snippet:snippet' snippet.uid.hex %}">
-                                {{ snippet.title }}
-                            </a>
-                        </h5>
-                    </div>
-                    {% if snippet.description %}
-                        <div class="card-block">
-                            {{ snippet.description }}
-                        </div>
-                    {% endif %}
-                    <div class="card-block" style="padding: 0;">
-                            <pre style="margin: 0; border-radius: 0"><code
-                                    class="language-{{ snippet.language | lower }} line-numbers language-markup">{{ snippet.code }}</code></pre>
-                    </div>
-                    <div class="card-footer text-muted">
-                        &lt; {{ snippet.language }} &gt;
-                        &middot;
-                        Last modified {{ snippet.last_modified.date }}
-                    </div>
-                </div>
-            </div>
-        {% empty %}
-            <div class="col-md-12">
-                Looks like there ain't any snippets yet.
-            </div>
-        {% endfor %}
+        {% include 'snippet/snippets.html' %}
     </div>
     <br>
 {% endblock %}

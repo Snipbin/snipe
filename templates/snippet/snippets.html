@@ -1,0 +1,42 @@
+{% for snippet in snippets %}
+    <div class="col-md-12">
+        <br>
+        <div class="card">
+            <div class="card" style="flex-direction: row;">
+                <div class="card-block w-75">
+                    <h5 class="card-title">
+                        <a href="{% url 'snippet:snippet' snippet.uid.hex %}">
+                            {{ snippet.title }}
+                        </a>
+                    </h5>
+                    {% if snippet.description %}
+                        <p class="card-text">{{ snippet.description }}</p>
+                    {% endif %}
+                </div>
+                <div class="card-block w-25">
+                    <h5 class="card-title text-muted">
+                        <i class="fa fa-bookmark" aria-hidden="true"></i>
+                        &nbsp; {{ snippet.bookmarks_count }}
+                    </h5>
+                    <h5 class="card-subtitle text-muted">
+                        <i class="fa fa-eye" aria-hidden="true"></i>
+                        &nbsp; 0
+                    </h5>
+                </div>
+            </div>
+            <div class="card-block" style="padding: 0;">
+                    <pre style="margin: 0; border-radius: 0"><code
+                            class="language-{{ snippet.language | lower }} line-numbers language-markup">{{ snippet.code }}</code></pre>
+            </div>
+            <div class="card-footer text-muted">
+                &lt; {{ snippet.language }} &gt;
+                &middot;
+                Last modified {{ snippet.last_modified.date }}
+            </div>
+        </div>
+    </div>
+{% empty %}
+    <div class="col-md-12">
+        Looks like there ain't any snippets yet.
+    </div>
+{% endfor %}

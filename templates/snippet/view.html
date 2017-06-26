@@ -16,10 +16,13 @@
 {% endblock %}
 
 {% block body_main %}
+    <form action="{% url 'snippet:bookmark' snippet.uid.hex %}" method="POST" id="bookmark_form">
+        {% csrf_token %}
+    </form>
     <div class="container">
         <br>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-9">
                 <h5 class="card-title">{{ snippet.title }}</h5>
                 <h6>
                     <a href="{% url 'account:user' snippet.author.username %}">
@@ -27,21 +30,33 @@
                     </a>
                     &middot; {{ snippet.author.job_title }} &middot; {{ snippet.author.department }}</h6>
             </div>
+            <div class="col-md-3">
+                <button class="btn btn-secondary text-muted" type="submit" form="bookmark_form">
+                    <i class="fa fa-bookmark" aria-hidden="true"></i>
+                    &nbsp; {{ snippet.bookmarks_count }}
+                </button>
+                <h5 class="text-muted">
+                    <i class="fa fa-eye" aria-hidden="true"></i>
+                    &nbsp; 0
+                </h5>
+            </div>
             <div class="col-md-12">
                 <hr>
             </div>
             <div class="col-md-6">
                 <p>{{ snippet.description }}</p>
             </div>
-            <div class="col-md-6">
-                <div class="float-md-right">
-                    <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal"
-                            style="color: #000000"><i
-                            class="fa fa-trash"></i> Delete
-                    </button>
-                    <a class="btn btn-outline-success" href="{% url 'snippet:snippet_edit' snippet.uid.hex %}" style="color: #000000"><i class="fa fa-pencil"></i> Edit</a>
+            {% if snippet.author_id == request.user.id %}
+                <div class="col-md-6">
+                    <div class="float-md-right">
+                        <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal"
+                                style="color: #000000"><i
+                                class="fa fa-trash"></i> Delete
+                        </button>
+                        <a class="btn btn-outline-success" href="{% url 'snippet:snippet_edit' snippet.uid.hex %}" style="color: #000000"><i class="fa fa-pencil"></i> Edit</a>
+                    </div>
                 </div>
-            </div>
+            {% endif %}
             <div class="col-md-12">
                 <pre class=""><code
                         class="language-{{ snippet.language | lower }} line-numbers language-markup">{{ snippet.code }}</code></pre>

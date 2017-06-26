@@ -44,5 +44,5 @@ class Snippet(models.Model):
 
 
 class Bookmark(models.Model):
-    snippet = models.ForeignKey(Snippet, related_name='snippet')
-    user = models.ForeignKey(SnipeUser, related_name='user')
+    snippet = models.ForeignKey(Snippet, related_name='bookmarks')
+    user = models.ForeignKey(SnipeUser, related_name='bookmarks')

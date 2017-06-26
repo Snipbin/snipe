@@ -12,17 +12,17 @@ class NewSnippetView(LoginRequiredMixin, View):
     redirect_field_name = 'redirect'
 
     @staticmethod
-    def __build_context():
+    def _build_context():
         context = dict()
         context['all_languages'] = Language.objects.all().order_by('name')
         return context
 
     def get(self, request):
-        context = self.__build_context()
+        context = self._build_context()
         return render(request, self.homepage, context)
 
     def post(self, request):
-        context = self.__build_context()
+        context = self._build_context()
         context['errors'] = list()
         post_data = request.POST.dict()
         if post_data['title'] == '':

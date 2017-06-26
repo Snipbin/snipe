@@ -41,15 +41,13 @@ class SnippetEditView(LoginRequiredMixin, View):
 
         serialized_data = SnippetEditSerializer(data=request.POST, instance=snippet)
         if serialized_data.is_valid():
-            instance: Snippet = serialized_data.instance
             snippet_expiry_date = timezone.now()
             expiry_field = serialized_data.validated_data['expiry']
             if expiry_field == 0:
                 snippet_expiry_date += timezone.timedelta(days=999999)  # ToDo: Make this more robust
             else:
                 snippet_expiry_date += timezone.timedelta(days=expiry_field)
-            instance.expiry_date = snippet_expiry_date
-            instance.last_modified = timezone.now()
+            serialized_data.save(expiry_date=snippet_expiry_date, last_modified=timezone.now())
             return redirect('snippet:snippet', uid=snippet.uid.hex)
         else:
             context['errors'] = serialized_data.errors

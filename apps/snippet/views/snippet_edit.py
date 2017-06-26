@@ -35,9 +35,9 @@ class SnippetEditView(LoginRequiredMixin, View):
         if snippet.author_id != request.user.id:
             return HttpResponseForbidden()
 
-        context = dict()
-        context['errors'] = list()
-        context['all_languages'] = Language.objects.order_by('name')
+        context = {
+            'all_languages': Language.objects.order_by('name'),
+        }
 
         serialized_data = SnippetEditSerializer(data=request.POST, instance=snippet)
         if serialized_data.is_valid():

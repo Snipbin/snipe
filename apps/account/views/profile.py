@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.views import View
 
 from apps.account.models import SnipeUser
+from apps.snippet.models import PrivacyChoices
 
 
 class ProfileView(LoginRequiredMixin, View):
@@ -15,6 +16,6 @@ class ProfileView(LoginRequiredMixin, View):
             return render(request, '404.html', context)
         snippets = user.snipes.all().order_by('-last_modified')
         if request.user.username != user.username:
-            snippets = snippets.filter(is_private='PUBLIC')
+            snippets = snippets.filter(is_private=PrivacyChoices.PUBLIC)
         context['snippets'] = snippets
         return render(request, self.profile_page, context)

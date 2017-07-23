@@ -25,8 +25,10 @@
                 </div>
             </div>
             <div class="card-block" style="padding: 0;">
-                    <pre style="margin: 0; border-radius: 0"><code
+                <a class="link-unstyled" href="{% url 'snippet:snippet' snippet.uid.hex %}">
+                    <pre class="preview-code" style="margin: 0; border-radius: 0"><code
                             class="language-{{ snippet.language | lower }} line-numbers language-markup">{{ snippet.code }}</code></pre>
+                </a>
             </div>
             <div class="card-footer text-muted">
                 &lt; {{ snippet.language }} &gt;

@@ -1,3 +1,20 @@
 html, body {
     height: 100%;
 }
+
+pre.preview-code {
+    max-height: 400px;
+    -webkit-box-shadow: inset 0 -40px 40px -40px white;
+    -moz-box-shadow: inset 0 -40px 40px -40px white;
+    box-shadow: inset 0 -40px 40px -40px white;
+    overflow: hidden !important;
+}
+
+a.link-unstyled, a.link-unstyled:link, a.link-unstyled:hover {
+    color: inherit;
+    text-decoration: none;
+}
+
+div.snipe-paginator {
+    margin-top: 20px;
+}

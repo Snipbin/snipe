@@ -17,7 +17,8 @@ class ProfileView(LoginRequiredMixin, PaginationView):
             return render(request, '404.html')
 
         snippets = user.snipes.all().order_by('-last_modified').annotate(
-            bookmarks_count=Count('bookmarks'),
+            bookmarks_count=Count('bookmarks', distinct=True),
+            views_count=Count('views', distinct=True),
         )
 
         if request.user.username != user.username:

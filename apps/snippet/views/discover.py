@@ -16,7 +16,8 @@ class DiscoverView(LoginRequiredMixin, PaginationView):
         snippets = Snippet.objects.filter(
             Q(is_private=PrivacyChoices.PUBLIC) | Q(author_id=request.user.id)
         ).order_by('-last_modified').annotate(
-            bookmarks_count=Count('bookmarks'),
+            bookmarks_count=Count('bookmarks', distinct=True),
+            views_count=Count('views', distinct=True),
         )
 
         snippets = self.get_page(snippets)

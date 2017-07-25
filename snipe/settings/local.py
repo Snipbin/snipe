@@ -19,9 +19,12 @@ DATABASES = {
         'PASSWORD': DB_PASSWORD,
         'HOST': DB_HOST_NAME,
         'PORT': DB_PORT,
+        'OPTIONS': DB_OPTIONS,
     }
 }
 
 STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
+
+AZURE_SEARCH_OPTIONS = AZURE_SEARCH_OPTIONS

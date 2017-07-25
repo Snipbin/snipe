@@ -77,9 +77,9 @@ class AdalRedirectHandlerView(View):
         alias = me['mailNickname'] if me['mailNickname'] else me['userPrincipalName']
 
         user, _ = SnipeUser.objects.update_or_create(
-            username=alias, tenant_id=tenant_id,
+            object_id=user_oid, tenant_id=tenant_id,
             defaults={
-                'object_id': user_oid,
+                'username': alias,
                 'refresh_token': refresh_token,
                 'email': email,
                 'first_name': me['givenName'],

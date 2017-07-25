@@ -31,14 +31,14 @@
                     &middot; {{ snippet.author.job_title }} &middot; {{ snippet.author.department }}</h6>
             </div>
             <div class="col-md-3">
-                <button class="btn btn-secondary text-muted" type="submit" form="bookmark_form">
+                <button class="btn btn-secondary text-muted" role="button" type="submit" form="bookmark_form">
                     <i class="fa fa-bookmark" aria-hidden="true"></i>
                     &nbsp; {{ snippet.bookmarks_count }}
                 </button>
-                <h5 class="text-muted">
-                    <i class="fa fa-eye" aria-hidden="true"></i>
-                    &nbsp; 0
-                </h5>
+                    <button class="btn btn-secondary text-muted disabled">
+                        <i class="fa fa-eye" aria-hidden="true"></i>
+                        &nbsp; {{ snippet.views_count }}
+                    </button>
             </div>
             <div class="col-md-12">
                 <hr>

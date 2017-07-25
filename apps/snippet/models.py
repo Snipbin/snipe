@@ -1,6 +1,9 @@
 import uuid
 
 from django.db import models
+from django.db.models import Q
+from django.db.models.signals import post_save, post_delete
+from django.dispatch import receiver
 from simple_history.models import HistoricalRecords
 
 from apps.account.models import SnipeUser
@@ -46,3 +49,32 @@ class Snippet(models.Model):
 class Bookmark(models.Model):
     snippet = models.ForeignKey(Snippet, related_name='bookmarks')
     user = models.ForeignKey(SnipeUser, related_name='bookmarks')
+
+    class Meta(object):
+        unique_together = ('snippet', 'user')
+
+
+class SnippetViews(models.Model):
+    snippet = models.ForeignKey(Snippet, related_name='views')
+    user = models.ForeignKey(SnipeUser, related_name='viewed_snipes')
+
+    class Meta(object):
+        unique_together = ('snippet', 'user')
+
+
+class SnippetSearchUpdate(models.Model):
+    snippet = models.ForeignKey(Snippet, null=True, blank=True)
+    deletable_id = models.CharField(max_length=64, null=True, blank=True)
+    pushed = models.BooleanField(default=False)
+
+
+@receiver(post_save, sender=Snippet)
+def snippet_post_save(sender, instance: Snippet, **kwargs):
+    snippet_search = SnippetSearchUpdate(snippet=instance)
+    snippet_search.save()
+
+
+@receiver(post_delete, sender=Snippet)
+def snippet_post_delete(sender, instance: Snippet, **kwargs):
+    snippet_search = SnippetSearchUpdate(deletable_id=instance.uid)
+    snippet_search.save()

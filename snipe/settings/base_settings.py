@@ -96,6 +96,8 @@ LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Asia/Kolkata'
 
+ATOMIC_REQUESTS = True
+
 USE_I18N = True
 
 USE_L10N = True
@@ -112,3 +114,4 @@ STATICFILES_DIRS = (
 )
 
 LOGIN_URL = 'core:home'
+

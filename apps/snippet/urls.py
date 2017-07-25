@@ -10,6 +10,7 @@ from apps.snippet.views.snippet_edit import SnippetEditView
 urlpatterns = [
     url(r'^$', NewSnippetView.as_view(), name='new'),
     url(r'^discover/$', DiscoverView.as_view(), name='discover'),
+    url(r'^search/$', DiscoverView.as_view(), name='search'),
     url(r'^(?P<uid>\w+)/$', SnippetView.as_view(), name='snippet'),
     url(r'^(?P<uid>\w+)/bookmark/$', BookmarkView.as_view(), name='bookmark'),
     url(r'^(?P<uid>\w+)/delete/$', SnippetDeleteView.as_view(), name='snippet_delete'),

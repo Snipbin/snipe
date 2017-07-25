@@ -16,6 +16,15 @@ DB_HOST_NAME = 'localhost'
 
 DB_PORT = '5432'
 
+DB_OPTIONS = {}
+
+AZURE_SEARCH_OPTIONS = {
+    'service-name': 'service-name',
+    'api-key': 'REDACTED',
+    'snippet_index': 'snippets',
+    'api-version': '2016-09-01',
+}
+
 ADMINS_EMAIL_LIST = [
     # ('Name', 'email@example.com'),
 ]

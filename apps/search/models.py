@@ -3,7 +3,8 @@ from typing import List
 
 class SearchUpdate(object):
 
-    def __init__(self, id_, title=None, description=None, code=None, author=None, language=None, action="upload"):
+    def __init__(self, id_, title=None, description=None, code=None, author=None, language=None, last_modified=None,
+                 action="upload"):
         self.action = action
         self.id_ = id_
         self.title = title
@@ -11,6 +12,7 @@ class SearchUpdate(object):
         self.code = code
         self.author = author
         self.language = language
+        self.last_modified = last_modified
 
 
 class AzureSearchResponseData(object):

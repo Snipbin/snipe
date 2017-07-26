@@ -35,6 +35,7 @@ class Command(BaseCommand):
                         snippet_update.snippet.code,
                         snippet_update.snippet.author.username.lower(),
                         snippet_update.snippet.language.name.lower(),
+                        snippet_update.snippet.last_modified,
                     )
                 else:
                     search_update = SearchUpdate(
@@ -55,6 +56,7 @@ class Command(BaseCommand):
                     snippet.code,
                     snippet.author.username.lower(),
                     snippet.language.name.lower(),
+                    snippet.last_modified,
                 )
                 search_updates.append(search_update)
 

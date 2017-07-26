@@ -11,10 +11,11 @@ class SearchUpdateSerializer(serializers.Serializer):
     code = serializers.CharField()
     author = serializers.CharField()
     language = serializers.CharField()
+    last_modified = serializers.DateTimeField()
 
     def to_representation(self, instance):
         initial = super().to_representation(instance)
-        initial["@value.action"] = initial["action"]
+        initial["@search.action"] = initial["action"]
         initial["id"] = initial["id_"]
         del initial["action"]
         del initial["id_"]

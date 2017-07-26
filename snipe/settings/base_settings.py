@@ -116,3 +116,4 @@ STATICFILES_DIRS = (
 
 LOGIN_URL = 'core:home'
 
+USE_X_FORWARDED_HOST = True

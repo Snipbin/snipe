@@ -1,6 +1,7 @@
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage, Page
 from django.urls import reverse
 from django.views import View
+from urllib.parse import urlencode
 
 from apps.core.utils import VIEW_PAGE_SIZE
 
@@ -32,9 +33,20 @@ class PaginationView(View):
         next_page_number = page.next_page_number() if has_next else -1
         previous_page_number = page.previous_page_number() if has_previous else -1
 
+        next_query_dict = self.request.GET.dict()
+        previous_query_dict = self.request.GET.dict()
+
+        next_query_dict.update({
+            self.page_name: next_page_number,
+        })
+
+        previous_query_dict.update({
+            self.page_name: previous_page_number,
+        })
+
         base_url = reverse('snippet:discover')
-        next_url = f'{base_url}?{self.page_name}={next_page_number}'
-        previous_url = f'{base_url}?{self.page_name}={previous_page_number}'
+        next_url = f'{base_url}?{urlencode(next_query_dict)}'
+        previous_url = f'{base_url}?{urlencode(previous_query_dict)}'
 
         context.update({
             'page_name': self.page_name,

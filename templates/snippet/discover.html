@@ -16,10 +16,39 @@
 
 {% block body_main %}
     <div class="container">
-        <div class="col-md-12">
-            <br>
-            <h4>Latest Snippets</h4>
-            <hr>
+        <div class="col-md-12 row">
+            <div class="col-md-9">
+                <br>
+                <h4>Discover Snippets</h4>
+            </div>
+            <div class="col-md-3">
+                <br>
+                <div class="dropdown">
+                  <button class="btn btn-secondary dropdown-toggle float-right" type="button" id="dropdownMenuButton"
+                          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Sorting options
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" href="{% url 'snippet:discover' %}?s=m&d=d">
+                          Recently modified
+                          {% if order_by == "md" %}<i class="fa fa-check" aria-hidden="true"></i>{% endif %}
+                      </a>
+                      <a class="dropdown-item" href="{% url 'snippet:discover' %}?s=m&d=a">
+                          Anciently modified
+                          {% if order_by == "ma" %}<i class="fa fa-check" aria-hidden="true"></i>{% endif %}
+                      </a>
+                      <a class="dropdown-item" href="{% url 'snippet:discover' %}?s=c&d=d">
+                          Recently added
+                          {% if order_by == "cd" %}<i class="fa fa-check" aria-hidden="true"></i>{% endif %}
+                      </a>
+                      <a class="dropdown-item" href="{% url 'snippet:discover' %}?s=c&d=a">
+                          Anciently added
+                          {% if order_by == "ca" %}<i class="fa fa-check" aria-hidden="true"></i>{% endif %}
+                      </a>
+
+                  </div>
+                </div>
+            </div>
         </div>
         {% include 'snippet/snippets.html' %}
 

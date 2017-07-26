@@ -59,8 +59,9 @@ $(document).ready(function() {
         $("#submit-snippet-button").attr("disabled", true);
         return true;
 	});
-	
-	$("#file-upload-btn").on("change",function(){
+
+    
+    $("#file-upload-btn").on("change",function(){
         var file  = this.files[0];
         var reader = new FileReader();
         reader.readAsText(file, "UTF-8");
@@ -76,6 +77,7 @@ $(document).ready(function() {
 
 
 (function(){
+
     if (typeof self === 'undefined' || !self.Prism || !self.document) {
         return;
     }
@@ -88,29 +90,7 @@ $(document).ready(function() {
 
     var Clipboard = window.Clipboard || undefined;
 
-    if (!Clipboard && typeof require === 'function') {
-        Clipboard = require('clipboard');
-    }
-
     var callbacks = [];
-
-    if (!Clipboard) {
-        var script = document.createElement('script');
-        var head = document.querySelector('head');
-
-        script.onload = function() {
-            Clipboard = window.Clipboard;
-
-            if (Clipboard) {
-                while (callbacks.length) {
-                    callbacks.pop()();
-                }
-            }
-        };
-
-        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.8/clipboard.min.js';
-        head.appendChild(script);
-    }
 
     Prism.plugins.toolbar.registerButton('copy-to-clipboard', function (env) {
         var linkCopy = document.createElement('a');

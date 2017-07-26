@@ -18,3 +18,7 @@ a.link-unstyled, a.link-unstyled:link, a.link-unstyled:hover {
 div.snipe-paginator {
     margin-top: 20px;
 }
+
+pre.code-toolbar > .toolbar {
+    opacity: 1 !important;
+}

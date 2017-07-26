@@ -37,7 +37,7 @@ $(document).ready(function() {
         container: '.fa.fa-info'
     });
 
-    var query = getParameterByName('query')
+    var query = getParameterByName('query');
     if (query) {
         $("#snippet-search").attr('value', query);
     }
@@ -53,6 +53,11 @@ $(document).ready(function() {
             var extension = file.name.split('.').pop();
             $("#snip-lang").val(getLangFromFileExtension(extension));
         }
+    });
+
+    $("#snippet-form").submit(function () {
+        $("#submit-snippet-button").attr("disabled", true);
+        return true;
     });
 });
 
@@ -132,3 +137,5 @@ $(document).ready(function() {
         }
     });
 })();
+
+

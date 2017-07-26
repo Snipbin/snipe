@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-12">
                 <br>
-                <form method="post" action="{% url 'snippet:snippet_edit' snippet.uid.hex %}">
+                <form method="post" action="{% url 'snippet:snippet_edit' snippet.uid.hex %}" id="snippet-form">
                     {% csrf_token %}
                     <h5>New Snippet</h5>
                     <hr>
@@ -27,7 +27,7 @@
                             <div class="form-group" style="width: inherit">
                                 <select id="snip-lang" name="language" class="custom-select" style="width: inherit" title="Language">
                                     {% for language in all_languages %}
-                                        <option value="{{ language.id }}"
+                                        <option value="{{ language.id }}" data-extension="{{ language.extensions }}"
                                         {% if language == snippet.language %}
                                             selected="selected"
                                         {% endif %}
@@ -86,7 +86,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group" style="width: inherit">
-                                <input class="btn btn-outline-success mb-4" type="submit" style="width: inherit"
+                                <input id="submit-snippet-button" class="btn btn-outline-success mb-4" type="submit" style="width: inherit"
                                        value="Finish Editing Snippet">
                             </div>
                             {% for error in errors %}

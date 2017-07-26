@@ -26,10 +26,23 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto my-lg-0">
                 {% if user.is_authenticated %}
-                    <li class="nav-item" style="visibility: hidden">
-                        {# ToDO: Implement Search #}
-                        <a class="nav-link" href="#">Search</a>
-                    </li>
+                    <form class="form-inline my-2 my-lg-0" method="get" action="{% url 'search:search' %}">
+                        <div class="input-group">
+                            <input class="form-control" style="min-width:400px !important;" type="text" name="query"
+                                   id="snippet-search" placeholder="Search snippets by author, language">
+
+                            <div id="search-help-tooltip" class="input-group-addon" data-toggle="popover"
+                                 data-trigger="focus" data-html="true" data-placement="bottom"
+                                 data-content="Search Examples:<br>
+                                 1. merge-sort<br>
+                                 2. lang:Python,C# merge sort<br>
+                                 3. author:alias1,alias2 hello world<br>
+                                 4. author:alias1 lang:Python,Go sort">
+                                <i class="fa fa-info"></i>
+                            </div>
+                            </span>
+                        </div>
+                    </form>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'snippet:discover' %}">Discover</a>
                     </li>
@@ -81,6 +94,7 @@
 <script src="{% static 'javascript/jquery-3.1.1.slim.min.js' %}"></script>
 <script src="{% static 'javascript/tether.min.js' %}"></script>
 <script src="{% static 'javascript/bootstrap.min.js' %}"></script>
+<script src="{% static 'javascript/main.js' %}"></script>
 {% block javascript %} {% endblock %}
 </body>
 </html>

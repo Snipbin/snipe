@@ -1,0 +1,29 @@
+{% extends "base_template.html" %}
+
+{% load staticfiles %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/prism.css' %}">
+{% endblock %}
+
+{% block javascript %}
+    <script src="{% static 'javascript/prism.js' %}"></script>
+{% endblock %}
+
+{% block title %}
+    SnipBin &middot; Search
+{% endblock %}
+
+{% block body_main %}
+    <div class="container">
+        <div class="col-md-12">
+            <br>
+            <h4>Total results: {{ count }}</h4>
+            <hr>
+        </div>
+        {% include 'snippet/snippets.html' %}
+
+        {% include 'snippet/paginator.html' %}
+    </div>
+    <br>
+{% endblock %}

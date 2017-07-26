@@ -1,42 +1,11 @@
 from django.conf import settings
 from django.core.management import BaseCommand
 from requests import HTTPError
-import json
 
-from apps.core.azure_search import AzureSearch
+from apps.search.azure_search import AzureSearch
+from apps.search.models import SearchUpdate
+from apps.search.serializers import SearchUpdateSerializer
 from apps.snippet.models import SnippetSearchUpdate, Snippet
-from rest_framework import serializers
-
-
-class SearchUpdate(object):
-
-    def __init__(self, id_, title=None, description=None, code=None, author=None, language=None, action="upload"):
-        self.action = action
-        self.id_ = id_
-        self.title = title
-        self.description = description
-        self.code = code
-        self.author = author
-        self.language = language
-
-
-class SearchUpdateSerializer(serializers.Serializer):
-
-    action = serializers.ChoiceField(choices=["upload", "delete"], default="upload")
-    id_ = serializers.CharField()
-    title = serializers.CharField()
-    description = serializers.CharField()
-    code = serializers.CharField()
-    author = serializers.CharField()
-    language = serializers.CharField()
-
-    def to_representation(self, instance):
-        initial = super().to_representation(instance)
-        initial["@value.action"] = initial["action"]
-        initial["id"] = initial["id_"]
-        del initial["action"]
-        del initial["id_"]
-        return initial
 
 
 class Command(BaseCommand):
@@ -49,7 +18,6 @@ class Command(BaseCommand):
 
     def handle(self, **options):
         is_all = options['all']
-        delete = options['delete']
 
         search_updates = []
         snippets_updates = None
@@ -65,8 +33,8 @@ class Command(BaseCommand):
                         snippet_update.snippet.title,
                         snippet_update.snippet.description,
                         snippet_update.snippet.code,
-                        snippet_update.snippet.author.username,
-                        snippet_update.snippet.language.name,
+                        snippet_update.snippet.author.username.lower(),
+                        snippet_update.snippet.language.name.lower(),
                     )
                 else:
                     search_update = SearchUpdate(
@@ -85,8 +53,8 @@ class Command(BaseCommand):
                     snippet.title,
                     snippet.description,
                     snippet.code,
-                    snippet.author.username,
-                    snippet.language.name,
+                    snippet.author.username.lower(),
+                    snippet.language.name.lower(),
                 )
                 search_updates.append(search_update)
 

@@ -9,6 +9,3 @@ class HomeView(View):
         if request.user.is_authenticated():
             return redirect('/')
         return render(request, self.homepage, {})
-
-    def post(self, request):
-        pass

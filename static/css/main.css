@@ -3,7 +3,7 @@ html, body {
 }
 
 pre.preview-code {
-    max-height: 400px;
+    max-height: 200px;
     -webkit-box-shadow: inset 0 -40px 40px -40px white;
     -moz-box-shadow: inset 0 -40px 40px -40px white;
     box-shadow: inset 0 -40px 40px -40px white;

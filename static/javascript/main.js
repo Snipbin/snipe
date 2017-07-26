@@ -46,8 +46,9 @@ $(document).ready(function() {
         $("#submit-snippet-button").attr("disabled", true);
         return true;
 	});
-	
-	$("#file-upload-btn").on("change",function(){
+
+    
+    $("#file-upload-btn").on("change",function(){
         var file  = this.files[0];
         var reader = new FileReader();
         reader.readAsText(file, "UTF-8");

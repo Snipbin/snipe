@@ -106,7 +106,14 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group" style="width: inherit">
-                                <input id="submit-snippet-button" class="btn btn-outline-success mb-4" type="submit" style="width: inherit"
+                                <input id="submit-snippet-button" class="btn btn-outline-success mb-4" type="submit" style="width: inherit">
+                                <label for="file-upload-btn"> Populate Snippet from file
+                                    <input class="btn btn-outline-info mb-4" id="file-upload-btn" type="file" style="width: inherit">
+                                </label>
+                            </div>
+                            
+                            <div class="form-group" style="width: inherit">
+                                <input class="btn btn-outline-success mb-4" type="submit" style="width: inherit"
                                        value="Create New Snippet">
                             </div>
                             {% for error in errors %}

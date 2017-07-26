@@ -58,6 +58,17 @@ $(document).ready(function() {
     $("#snippet-form").submit(function () {
         $("#submit-snippet-button").attr("disabled", true);
         return true;
+	});
+	
+	$("#file-upload-btn").on("change",function(){
+        var file  = this.files[0];
+        var reader = new FileReader();
+        reader.readAsText(file, "UTF-8");
+        reader.onload = function (evt) {
+            $("#snip-code").val(evt.target.result);
+            $("#snip-title").val(file.name);
+            $("#snip-description").val(file.name);
+        }
     });
 });
 

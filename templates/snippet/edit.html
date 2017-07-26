@@ -53,9 +53,11 @@
                             <h5>Optional Settings</h5>
                             <hr>
                             <div class="form-group" style="width: inherit">
+                                Will expire on <b>{{ snippet.expiry_date }}</b>
                                 <select class="custom-select" name="expiry" id="snip-expiry" title="Expiry"
                                         style="width: inherit">
-                                    <option selected value="0">Never Expire</option>
+                                    <option selected value="-1">Change expiry date</option>
+                                    <option value="0">Never Expire</option>
                                     <option value="7">Expire in One Week</option>
                                     <option value="14">Expire in Two Weeks</option>
                                     <option value="30">Expire in One Month</option>

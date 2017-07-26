@@ -27,7 +27,7 @@
                             <div class="form-group" style="width: inherit">
                                 <select name="language" class="custom-select" style="width: inherit" title="Language">
                                     {% for language in all_languages %}
-                                        <option value="{{ language.id }}"
+                                        <option value="{{ language.id }}" data-extension="{{ language.extensions }}"
                                         {% if language == snippet.language %}
                                             selected="selected"
                                         {% endif %}

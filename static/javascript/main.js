@@ -8,6 +8,29 @@ function getParameterByName(name, url) {
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
+Array.prototype.contains = function ( needle ) {
+    for (i in this) {
+        if (this[i] == needle) return true;
+    }
+    return false;
+}
+
+function getLangFromFileExtension(extension){
+    var returnVal = -1;
+    $("#snip-lang > option").each(function() {
+        if((returnVal == -1) && (this.text == "Text"))
+        {
+            returnVal = this.value;
+        }
+        var validExtnesions = $(this).data("extension").split(',');
+        if(validExtnesions.contains(extension))
+       {
+            returnVal = this.value;
+        }
+    });
+    return returnVal;
+}
+
 $(document).ready(function() {
     $("#search-help-tooltip").popover({
         trigger: 'hover',
@@ -27,6 +50,8 @@ $(document).ready(function() {
             $("#snip-code").val(evt.target.result);
             $("#snip-title").val(file.name);
             $("#snip-description").val(file.name);
+            var extension = file.name.split('.').pop();
+            $("#snip-lang").val(getLangFromFileExtension(extension));
         }
     });
 });

@@ -17,8 +17,18 @@ $(document).ready(function() {
     var query = getParameterByName('query')
     if (query) {
         $("#snippet-search").attr('value', query);
-    }
-
+	}
+	
+	$("#file-upload-btn").on("change",function(){
+        var file  = this.files[0];
+        var reader = new FileReader();
+        reader.readAsText(file, "UTF-8");
+        reader.onload = function (evt) {
+            $("#snip-code").val(evt.target.result);
+            $("#snip-title").val(file.name);
+            $("#snip-description").val(file.name);
+        }
+    });
 });
 
 

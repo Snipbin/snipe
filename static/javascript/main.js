@@ -68,6 +68,8 @@ $(document).ready(function() {
             $("#snip-code").val(evt.target.result);
             $("#snip-title").val(file.name);
             $("#snip-description").val(file.name);
+            var extension = file.name.split('.').pop();
+            $("#snip-lang").val(getLangFromFileExtension(extension));
         }
     });
 });

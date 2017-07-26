@@ -57,6 +57,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="Preview">
                             <a class="dropdown-item" href="{% url 'account:user' user.username %}">My Snippets</a>
+                            <a class="dropdown-item" href="{% url 'user_bookmarks' %}">My Bookmarks</a>
                             {# ToDO: Fix this URL #}
                             <div class="dropdown-divider"></div>
                             <form action="{% url 'authentication:logout' %}" method="post">

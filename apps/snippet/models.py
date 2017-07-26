@@ -1,9 +1,9 @@
 import uuid
 
 from django.db import models
-from django.db.models import Q
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
+from django.utils import timezone
 from simple_history.models import HistoricalRecords
 
 from apps.account.models import SnipeUser
@@ -49,6 +49,7 @@ class Snippet(models.Model):
 class Bookmark(models.Model):
     snippet = models.ForeignKey(Snippet, related_name='bookmarks')
     user = models.ForeignKey(SnipeUser, related_name='bookmarks')
+    bookmarked_on = models.DateTimeField(default=timezone.now)
 
     class Meta(object):
         unique_together = ('snippet', 'user')

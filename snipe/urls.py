@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from apps.account import urls as account_urls
+from apps.account.views.profile import BookmarkedSnippetsView
 from apps.authentication import urls as auth_urls
 from apps.core import urls as core_urls
 from apps.snippet import urls as snippet_urls
@@ -26,6 +27,7 @@ urlpatterns = [
     url(r'^auth/', include(auth_urls, namespace='authentication')),
     url(r'^home/', include(core_urls, namespace='core')),
     url(r'^search/', include(search_urls, namespace='search')),
+    url(r'^bookmarks/', BookmarkedSnippetsView.as_view(), name='user_bookmarks'),
     url(r'^u/(?P<username>[\w{}.-]+)/', include(account_urls, namespace='account')),
     url(r'^', include(snippet_urls, namespace='snippet')),
 ]

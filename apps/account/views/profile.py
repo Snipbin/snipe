@@ -4,7 +4,7 @@ from django.shortcuts import render
 
 from apps.account.models import SnipeUser
 from apps.core.views.pagination import PaginationView
-from apps.snippet.models import PrivacyChoices
+from apps.snippet.models import PrivacyChoices, Snippet
 
 
 class ProfileView(LoginRequiredMixin, PaginationView):
@@ -23,6 +23,27 @@ class ProfileView(LoginRequiredMixin, PaginationView):
 
         if request.user.username != user.username:
             snippets = snippets.filter(is_private=PrivacyChoices.PUBLIC)
+
+        snippets = self.get_page(snippets)
+
+        context = {
+            'snippets': snippets,
+        }
+
+        context = self.update_pagination_context(context)
+
+        return render(request, self.profile_page, context)
+
+
+class BookmarkedSnippetsView(LoginRequiredMixin, PaginationView):
+    profile_page = 'account/profile_page.html'
+
+    def get(self, request):
+
+        snippets = Snippet.objects.filter(bookmarks__user=request.user).order_by('-bookmarks__bookmarked_on').annotate(
+            bookmarks_count=Count('bookmarks', distinct=True),
+            views_count=Count('views', distinct=True),
+        )
 
         snippets = self.get_page(snippets)
 

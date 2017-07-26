@@ -9,7 +9,7 @@ from .conf import *  # pylint: disable=W0614,W0401
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ALLOWED_HOSTS
 
 STATIC_URL = '/static/'
 

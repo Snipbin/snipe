@@ -45,7 +45,7 @@
                         </div>
                         <div class="col-md-4 offset-md-2">
                             <div class="form-group" style="width: inherit">
-                                <select name="language" class="custom-select" style="width: inherit" title="Language">
+                                <select id="snip-lang" name="language" class="custom-select" style="width: inherit" title="Language">
                                     {% for language in all_languages %}
                                         <option value="{{ language.id }}"
                                                 {% if language.name == "Text" %}selected{% endif %}
@@ -65,6 +65,17 @@
                         <textarea placeholder="// Code" name="code" id="snip-code" class="form-control"
                                   rows="16"></textarea>
                     </div>
+                    <div style="width: 100%; height: 14px; border-bottom: 1px solid #dddddd; text-align: center">
+                        <span style="font-size: 14px; background-color: #FFFFFF; padding:10px;">
+                            Or
+                        </span>
+                    </div>
+                    <div class="form-group" style="width: inherit; margin-top:30px">
+                        <label for="file-upload-btn" class="btn btn-outline-info"> Populate Snippet from file
+                            <input class="btn btn-outline-info mb-4" id="file-upload-btn" type="file" style="width: inherit; display:none">
+                        </label>
+                    </div>
+
 
 {#                    <div class="form-group">#}
 {#                        <div id="editor">function foo(items) { var x = "All this is syntax highlighted"; return x;}</div>#}

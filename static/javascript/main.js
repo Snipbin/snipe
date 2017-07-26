@@ -8,6 +8,29 @@ function getParameterByName(name, url) {
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
+Array.prototype.contains = function ( needle ) {
+    for (i in this) {
+        if (this[i] == needle) return true;
+    }
+    return false;
+}
+
+function getLangFromFileExtension(extension){
+    var returnVal = -1;
+    $("#snip-lang > option").each(function() {
+        if((returnVal == -1) && (this.text == "Text"))
+        {
+            returnVal = this.value;
+        }
+        var validExtnesions = $(this).data("extension").split(',');
+        if(validExtnesions.contains(extension))
+       {
+            returnVal = this.value;
+        }
+    });
+    return returnVal;
+}
+
 $(document).ready(function() {
     $("#search-help-tooltip").popover({
         trigger: 'hover',
@@ -18,56 +41,94 @@ $(document).ready(function() {
     if (query) {
         $("#snippet-search").attr('value', query);
     }
+    
+    $("#file-upload-btn").on("change",function(){
+        var file  = this.files[0];
+        var reader = new FileReader();
+        reader.readAsText(file, "UTF-8");
+        reader.onload = function (evt) {
+            $("#snip-code").val(evt.target.result);
+            $("#snip-title").val(file.name);
+            $("#snip-description").val(file.name);
+            var extension = file.name.split('.').pop();
+            $("#snip-lang").val(getLangFromFileExtension(extension));
+        }
+    });
 
     $("#snippet-form").submit(function () {
         $("#submit-snippet-button").attr("disabled", true);
         return true;
+	});
+
+    
+    $("#file-upload-btn").on("change",function(){
+        var file  = this.files[0];
+        var reader = new FileReader();
+        reader.readAsText(file, "UTF-8");
+        reader.onload = function (evt) {
+            $("#snip-code").val(evt.target.result);
+            $("#snip-title").val(file.name);
+            $("#snip-description").val(file.name);
+            var extension = file.name.split('.').pop();
+            $("#snip-lang").val(getLangFromFileExtension(extension));
+        }
     });
 });
 
 
 (function(){
-	if (typeof self === 'undefined' || !self.Prism || !self.document) {
-		return;
-	}
 
-	Prism.plugins.toolbar.registerButton('copy-to-clipboard', function (env) {
-		var linkCopy = document.createElement('a');
-		linkCopy.innerHTML = '<i class="fa fa-copy"></i>';
+    if (typeof self === 'undefined' || !self.Prism || !self.document) {
+        return;
+    }
 
-		if (!Clipboard) {
-			callbacks.push(registerClipboard);
-		} else {
-			registerClipboard();
-		}
+    if (!Prism.plugins.toolbar) {
+        console.warn('Copy to Clipboard plugin loaded before Toolbar plugin.');
 
-		return linkCopy;
+        return;
+    }
 
-		function registerClipboard() {
-			var clip = new Clipboard(linkCopy, {
-				'text': function () {
-					return env.code;
-				}
-			});
+    var Clipboard = window.Clipboard || undefined;
 
-			clip.on('success', function() {
-				linkCopy.textContent = 'Copied!';
+    var callbacks = [];
 
-				resetText();
-			});
-			clip.on('error', function () {
-				linkCopy.textContent = 'Press Ctrl+C to copy';
+    Prism.plugins.toolbar.registerButton('copy-to-clipboard', function (env) {
+        var linkCopy = document.createElement('a');
+        linkCopy.innerHTML = '<i class="fa fa-copy"></i>';
 
-				resetText();
-			});
-		}
+        if (!Clipboard) {
+            callbacks.push(registerClipboard);
+        } else {
+            registerClipboard();
+        }
 
-		function resetText() {
-			setTimeout(function () {
-				linkCopy.innerHTML = '<i class="fa fa-copy"></i>';
-			}, 1000);
-		}
-	});
+        return linkCopy;
+
+        function registerClipboard() {
+            var clip = new Clipboard(linkCopy, {
+                'text': function () {
+                    return env.code;
+                }
+            });
+
+            clip.on('success', function() {
+                linkCopy.textContent = 'Copied!';
+
+                resetText();
+            });
+            clip.on('error', function () {
+                linkCopy.textContent = 'Press Ctrl+C to copy';
+
+                resetText();
+            });
+        }
+
+        function resetText() {
+            setTimeout(function () {
+                linkCopy.innerHTML = '<i class="fa fa-copy"></i>';
+            }, 1000);
+        }
+    });
 })();
 
 

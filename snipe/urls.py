@@ -28,6 +28,6 @@ urlpatterns = [
     url(r'^home/', include(core_urls, namespace='core')),
     url(r'^search/', include(search_urls, namespace='search')),
     url(r'^bookmarks/', BookmarkedSnippetsView.as_view(), name='user_bookmarks'),
-    url(r'^u/(?P<username>[\w{}.-]+)/', include(account_urls, namespace='account')),
+    url(r'^u/(?P<username>[\w#{}.-]+)/', include(account_urls, namespace='account')),
     url(r'^', include(snippet_urls, namespace='snippet')),
 ]

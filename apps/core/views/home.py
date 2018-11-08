@@ -6,6 +6,6 @@ class HomeView(View):
     homepage = 'core/home.html'
 
     def get(self, request):
-        if request.user.is_authenticated():
+        if request.user.is_authenticated:
             return redirect('/')
         return render(request, self.homepage, {})

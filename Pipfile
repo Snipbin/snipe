@@ -10,12 +10,14 @@ django-simple-history = "*"
 adal = "*"
 djangorestframework = "*"
 requests = "*"
+pillow = "*"
 
 [dev-packages]
 django-debug-toolbar = "*"
 pylint = "*"
 "pep8" = "*"
 isort = "*"
+django-extensions = "*"
 
 [requires]
 python_version = "3.7"

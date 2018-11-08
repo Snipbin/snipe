@@ -7,6 +7,7 @@ from apps.snippet.views.snippet import SnippetView
 from apps.snippet.views.snippet_delete import SnippetDeleteView
 from apps.snippet.views.snippet_edit import SnippetEditView
 
+app_name = 'apps.snippet'
 urlpatterns = [
     url(r'^$', NewSnippetView.as_view(), name='new'),
     url(r'^discover/$', DiscoverView.as_view(), name='discover'),

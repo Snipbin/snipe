@@ -27,12 +27,12 @@ class PrivacyChoices(object):
 
 
 class Snippet(models.Model):
-    title = models.CharField(max_length=64)
-    language = models.ForeignKey(Language, related_name='snipes')
+    title = models.CharField(max_length=128)
+    language = models.ForeignKey(Language, related_name='snipes', on_delete=models.DO_NOTHING)
     description = models.TextField()
     code = models.TextField()
-    author = models.ForeignKey(SnipeUser, related_name='snipes')
-    uid = models.UUIDField(default=uuid.uuid4, unique=True)  # TODO: Make a method to generate UUID
+    author = models.ForeignKey(SnipeUser, related_name='snipes', on_delete=models.CASCADE)
+    uid = models.UUIDField(default=uuid.uuid4, unique=True)
     is_private = models.CharField(choices=PrivacyChoices.choices(), default='PUBLIC', max_length=16)
     created_at = models.DateTimeField()
     last_modified = models.DateTimeField()
@@ -47,8 +47,8 @@ class Snippet(models.Model):
 
 
 class Bookmark(models.Model):
-    snippet = models.ForeignKey(Snippet, related_name='bookmarks')
-    user = models.ForeignKey(SnipeUser, related_name='bookmarks')
+    snippet = models.ForeignKey(Snippet, related_name='bookmarks', on_delete=models.CASCADE)
+    user = models.ForeignKey(SnipeUser, related_name='bookmarks', on_delete=models.CASCADE)
     bookmarked_on = models.DateTimeField(default=timezone.now)
 
     class Meta(object):
@@ -56,15 +56,15 @@ class Bookmark(models.Model):
 
 
 class SnippetViews(models.Model):
-    snippet = models.ForeignKey(Snippet, related_name='views')
-    user = models.ForeignKey(SnipeUser, related_name='viewed_snipes')
+    snippet = models.ForeignKey(Snippet, related_name='views', on_delete=models.CASCADE)
+    user = models.ForeignKey(SnipeUser, related_name='viewed_snipes', null=True, on_delete=models.SET_NULL)
 
     class Meta(object):
         unique_together = ('snippet', 'user')
 
 
 class SnippetSearchUpdate(models.Model):
-    snippet = models.ForeignKey(Snippet, null=True, blank=True)
+    snippet = models.ForeignKey(Snippet, null=True, blank=True, on_delete=models.SET_NULL)
     deletable_id = models.CharField(max_length=64, null=True, blank=True)
     pushed = models.BooleanField(default=False)
 

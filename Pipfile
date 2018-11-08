@@ -1,0 +1,21 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "*"
+"psycopg2" = "*"
+django-simple-history = "*"
+adal = "*"
+djangorestframework = "*"
+requests = "*"
+
+[dev-packages]
+django-debug-toolbar = "*"
+pylint = "*"
+"pep8" = "*"
+isort = "*"
+
+[requires]
+python_version = "3.7"
